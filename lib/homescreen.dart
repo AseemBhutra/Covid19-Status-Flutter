@@ -4,6 +4,8 @@ import 'package:covid19_status/informationScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'reusableCard.dart';
+import 'package:pie_chart/pie_chart.dart';
+import 'package:covid19_status/State_Data.dart';
 
 
 class Homescreen extends StatefulWidget {
@@ -24,15 +26,34 @@ class _HomescreenState extends State<Homescreen> {
   String incDeceased;
   String incRecovered;
   var arr;
+  List<String> stateName = [];
+  List<String> stateconfirmed = [];
+  List<String> stateactive = [];
+  List<String> statedeath = [];
+  List<String> staterecovered = [];
 
 
   @override
   void initState() {
     super.initState();
   fetchData(widget.totalData);
+  getStateData(widget.totalData);
   }
 
-  void fetchData(dynamic data){
+ void  getStateData(dynamic data){
+    for (int i = 0;i < 38; i++){
+  var name = data['statewise'][i]['state'];
+  stateName.add(name);
+  stateconfirmed.add(data['statewise'][i]['confirmed']);
+  stateactive.add(data['statewise'][i]['active']);
+  statedeath.add(data['statewise'][i]['deaths']);
+    staterecovered.add(data['statewise'][i]['recovered']);
+    }
+}
+
+
+
+void fetchData(dynamic data){
     setState(() {
       if(data == null){
         confirmed = 'error';
@@ -87,14 +108,26 @@ class _HomescreenState extends State<Homescreen> {
             decoration: BoxDecoration(
               color: kContainerColor,
               borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                image: AssetImage('images/cover1.jpg'),
-                fit: BoxFit.fill,
-              ),
             ),
-          ),
+          child: PieChart(
+            dataMap: {
+              'Confirmed': double.parse(confirmed),
+              'Active': double.parse(active),
+              'Recovered': double.parse(recovered),
+              'Deceased':double.parse(deceased)
+            },
+            colorList: [
+              Colors.yellow,
+              Colors.blue,
+              Colors.green,
+              Colors.red,
+            ],
 
+
+          ),
+          ),
         ),
+
         Expanded(
           child: Row(
             children: <Widget>[
@@ -106,23 +139,23 @@ class _HomescreenState extends State<Homescreen> {
                     Text('Confirmed',
                     style: TextStyle(
                       color:Colors.yellow,
-                      fontSize: 20,
+                      fontSize: kHeadcontSize,
                     ),
                     ),
                     SizedBox(
-                      height: 10.0,
+                      height: kSizedboxheight,
                     ),
                     Text(
                       '$confirmed',
                       style: kTitleTextstyle,
                     ),
                     SizedBox(
-                      height: 10.0,
+                      height: kSizedboxheight,
                     ),
                     Text(
                       '+ $incConfirmed',
                       style: TextStyle(
-                        fontSize: 15.0,
+                        fontSize: kTailContSize,
                         color: Colors.yellow,
                       ),
                     ),
@@ -139,18 +172,18 @@ class _HomescreenState extends State<Homescreen> {
                       Text('Active',
                         style: TextStyle(
                           color:Colors.blue,
-                          fontSize: 20,
+                          fontSize: kHeadcontSize,
                         ),
                       ),
                       SizedBox(
-                        height: 10.0,
+                        height: kSizedboxheight,
                       ),
                       Text(
                         '$active',
                         style: kTitleTextstyle,
                       ),
                       SizedBox(
-                        height: 10.0,
+                        height: kSizedboxheight,
                       ),
                     ],
                   ),
@@ -170,23 +203,23 @@ class _HomescreenState extends State<Homescreen> {
                         Text('Recovered',
                           style: TextStyle(
                             color:Colors.green,
-                            fontSize: 20,
+                            fontSize: kHeadcontSize,
                           ),
                         ),
                         SizedBox(
-                          height: 10.0,
+                          height: kSizedboxheight,
                         ),
                         Text(
                           '$recovered',
                           style: kTitleTextstyle,
                         ),
                         SizedBox(
-                          height: 10.0,
+                          height: kSizedboxheight,
                         ),
                         Text(
                           '+$incRecovered ',
                           style: TextStyle(
-                              fontSize: 15.0,
+                              fontSize: kTailContSize,
                               color: Colors.green,
                           ),
                         ),
@@ -202,23 +235,23 @@ class _HomescreenState extends State<Homescreen> {
                         Text('Deceased',
                           style: TextStyle(
                             color:Colors.red,
-                            fontSize: 20,
+                            fontSize: kHeadcontSize,
                           ),
                         ),
                         SizedBox(
-                          height: 10.0,
+                          height: kSizedboxheight,
                         ),
                         Text(
                           '$deceased',
                           style: kTitleTextstyle,
                         ),
                         SizedBox(
-                          height: 10.0,
+                          height: kSizedboxheight,
                         ),
                         Text(
                           '+$incDeceased',
                           style: TextStyle(
-                              fontSize: 15.0,
+                              fontSize: kTailContSize,
                               color: Colors.red,
                           ),
                         ),
@@ -239,12 +272,12 @@ class _HomescreenState extends State<Homescreen> {
                     child: Text('Last Updated',
                       style: TextStyle(
                         color:Colors.orange,
-                        fontSize: 20,
+                        fontSize: kHeadcontSize,
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10.0,
+                    height: kSizedboxheight,
                   ),
                   Center(
                     child: Text(
@@ -253,13 +286,13 @@ class _HomescreenState extends State<Homescreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 10.0,
+                    height: kSizedboxheight,
                   ),
                   Center(
                     child: Text(
                       '${arr[1]}',
                       style: TextStyle(
-                        fontSize: 15.0,
+                        fontSize: kTailContSize,
                         color: Colors.orange,
                       ),
                     ),
@@ -269,33 +302,71 @@ class _HomescreenState extends State<Homescreen> {
             ),
           ),
           Expanded(
-            child: FlatButton(
-              padding: EdgeInsets.all(0),
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutTheDisease()));
-              },
-              child: Container(
-                margin: EdgeInsets.all(5.0),
-                decoration: BoxDecoration(
-                  color: kContainerColor,
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Center(
-                      child: Text(
-                        'ABOUT THE DISEASE',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.red,
-                        ),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: GestureDetector(
+                    //padding: EdgeInsets.all(0),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => AboutTheDisease()));
+                    },
+                    child: Container(
+
+                      margin: EdgeInsets.all(5.0),
+                      decoration: BoxDecoration(
+                        color: kContainerColor,
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                       crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Center(
+                            child: Text(
+                              'ABOUT THE \n   DISEASE',
+                              style: TextStyle(
+                                fontSize: kHeadcontSize,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: GestureDetector(
+                    //padding: EdgeInsets.all(0),
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => StateDataScreen(statename: stateName,stateactive: stateactive,stateconfirmed: stateconfirmed,statedeaths: statedeath,staterecovered: staterecovered)));
+                    },
+                    child: Container(
+
+                      margin: EdgeInsets.all(5.0),
+                      decoration: BoxDecoration(
+                        color: kContainerColor,
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Center(
+                            child: Text(
+                              'STATE DATA',
+                              style: TextStyle(
+                                fontSize: kHeadcontSize,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -304,3 +375,9 @@ class _HomescreenState extends State<Homescreen> {
   }
 }
 
+
+//Charts ki jagah ye tha (First container me)
+//image: DecorationImage(
+//image: AssetImage('images/cover1.jpg'),
+//fit: BoxFit.fill,
+//),

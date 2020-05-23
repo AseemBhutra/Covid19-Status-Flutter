@@ -1,9 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InformationScreen extends StatelessWidget {
+  void customLaunch(command) async{
+    if (await canLaunch(command)) {
+      await launch(command);
+    } else {
+      print('could not launch $command');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,8 +65,10 @@ class InformationScreen extends StatelessWidget {
                           children: <Widget>[
                             IconButton(
                               iconSize: kIconsize,
-                              icon: FaIcon(FontAwesomeIcons.whatsapp),
-                              onPressed: (){},
+                              icon: FaIcon(FontAwesomeIcons.github),
+                              onPressed: (){
+                                customLaunch('https://github.com/AseemBhutra');
+                              },
                             ),
                             SizedBox(
                               width: 10,
@@ -66,7 +76,9 @@ class InformationScreen extends StatelessWidget {
                             IconButton(
                               iconSize: kIconsize,
                               icon: FaIcon(FontAwesomeIcons.instagram),
-                              onPressed: (){},
+                              onPressed: (){
+                                customLaunch('http://www.instagram.com/aseemmaheshwari/');
+                              },
                             ),
                             SizedBox(
                               width: 10,
@@ -74,7 +86,9 @@ class InformationScreen extends StatelessWidget {
                             IconButton(
                               icon: FaIcon(FontAwesomeIcons.facebook),
                               iconSize: kIconsize,
-                              onPressed: (){},
+                              onPressed: (){
+                                customLaunch('http://www.facebook.com/aseem.bhutra.7');
+                              },
                             ),
                             SizedBox(
                               width: 10,
@@ -82,7 +96,9 @@ class InformationScreen extends StatelessWidget {
                             IconButton(
                               icon: FaIcon(FontAwesomeIcons.linkedin),
                               iconSize: kIconsize,
-                              onPressed: (){},
+                              onPressed: (){
+                                customLaunch('http://www.linkedin.com/in/aseem-bhutra-3b5329173');
+                              },
                             ),
                           ],
                         ),
