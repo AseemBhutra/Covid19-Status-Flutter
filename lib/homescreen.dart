@@ -36,9 +36,15 @@ class _HomescreenState extends State<Homescreen> {
   @override
   void initState() {
     super.initState();
-  fetchData(widget.totalData);
-  getStateData(widget.totalData);
+    getdata();
   }
+
+  void getdata(){
+    fetchData(widget.totalData);
+    getStateData(widget.totalData);
+  }
+
+
 
  void  getStateData(dynamic data){
     for (int i = 0;i < 38; i++){

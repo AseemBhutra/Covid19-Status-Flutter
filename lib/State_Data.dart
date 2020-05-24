@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'constants.dart';
 
 class StateDataScreen extends StatefulWidget {
@@ -40,10 +39,6 @@ class _StateDataScreenState extends State<StateDataScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.search),onPressed: (){
-            },)
-        ],
         title: Text('State Data'),
         backgroundColor: kBackgroundColor,
       ),
