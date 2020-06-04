@@ -1,38 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'package:covid19_status/Statescreen.dart';
 
 class StateDataScreen extends StatefulWidget {
-  StateDataScreen({this.stateactive,this.stateconfirmed,this.statename,this.statedeaths,this.staterecovered});
-  final statename;
-  final stateconfirmed;
-  final stateactive;
-  final statedeaths;
-  final staterecovered;
+  StateDataScreen({this.statedata});
+  final  statedata;
 
   @override
   _StateDataScreenState createState() => _StateDataScreenState();
 }
 
 class _StateDataScreenState extends State<StateDataScreen> {
-  List<String> name = [];
-  List<String> confirmed = [];
-  List<String> active = [];
-  List<String> deaths = [];
-  List<String> recovered = [];
+  Map data;
+
   @override
   void initState() {
     super.initState();
-  printstateName(widget.statename,widget.stateconfirmed,widget.stateactive,widget.statedeaths,widget.staterecovered);
+    getdata(widget.statedata);
   }
-  void printstateName(dynamic sname,dynamic sconfirmed,dynamic sactive,dynamic sdeaths,dynamic srecovered){
-     name = sname;
-     confirmed = sconfirmed;
-     active = sactive;
-     deaths = sdeaths;
-     recovered = srecovered;
+  getdata(statedata){
+    data = statedata;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,80 +31,45 @@ class _StateDataScreenState extends State<StateDataScreen> {
         title: Text('State Data'),
         backgroundColor: kBackgroundColor,
       ),
-      body: name == null
+      body: data == null
           ? Center(
         child: CircularProgressIndicator(),
       )
           : ListView.builder(
         itemBuilder: (context, index) {
-          return Card(
-            color: kBackgroundColor,
-            child: Container(
-              color: kContainerColor,
-              height: 130,
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    color: kContainerColor,
-                    width: 200,
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          name[index],
-                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0),
-                        ),
-                      ],
-                    ),
+          return GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>StateScreen(data: data,index: index)));
+            },
+            child: Card(
+              color: kBackgroundColor,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: kContainerColor,
+                ),
+                height: 65,
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: Container(
+                  color: kContainerColor,
+                  width: 170,
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        data['statewise'][index]['state'],
+                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'CONFIRMED:' +
-                                  confirmed[index],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.yellow),
-                            ),
-                            Text(
-                              'ACTIVE:' +
-                                  active[index],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue),
-                            ),
-
-                            Text(
-                              'DEATHS:' +
-                                  deaths[index],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red,
-                            ),
-                            ),
-                            Text(
-                              'RECOVERED:' +
-                                  recovered[index],
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ))
-                ],
+                ),
               ),
             ),
           );
         },
-        itemCount: name == null ? 0 : name.length,
+        itemCount: data == null ? 0 : data['statewise'].length,
       ),
     );
   }

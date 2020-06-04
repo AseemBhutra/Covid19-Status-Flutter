@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:covid19_status/Networking.dart';
 import 'package:covid19_status/homescreen.dart';
 
 class Loadingscreen extends StatefulWidget {
@@ -20,15 +19,11 @@ class _LoadingscreenState extends State<Loadingscreen> {
 
   startTimer()async{
     var duration = Duration(seconds: 2);
-    return Timer(duration, getData);
+    return Timer(duration, route);
   }
-  void getData() async{
-    var url = 'https://api.covid19india.org/data.json';
-    Networkhelper networkhelper = Networkhelper(url);
-    var data = await networkhelper.getData();
-
+  void route() async{
      Navigator.pushReplacement(context, MaterialPageRoute(
-         builder: (context) => Homescreen(totalData: data)));
+         builder: (context) => Homescreen()));
  }
 
    @override
@@ -61,7 +56,7 @@ class _LoadingscreenState extends State<Loadingscreen> {
              Padding(padding: EdgeInsets.only(top: 20.0),),
              CircularProgressIndicator(
                backgroundColor: Colors.white,
-               strokeWidth: 1.0,
+               strokeWidth: 3.0,
              ),
              Padding(padding: EdgeInsets.only(bottom: 20.0),),
            Expanded(
