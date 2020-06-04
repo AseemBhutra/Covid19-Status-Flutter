@@ -334,8 +334,3 @@ class _HomescreenState extends State<Homescreen> {
 }
 
 
-//Charts ki jagah ye tha (First container me)
-//image: DecorationImage(
-//image: AssetImage('images/cover1.jpg'),
-//fit: BoxFit.fill,
-//),

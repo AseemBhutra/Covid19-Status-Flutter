@@ -15,9 +15,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-
-
-
-
-//https://api.covid19india.org/data.json
