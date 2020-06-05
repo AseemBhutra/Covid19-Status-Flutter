@@ -1,6 +1,6 @@
-import 'package:covid19_status/loadingscreen.dart';
+import 'package:covid19_status/Screens/loadingscreen.dart';
 import 'package:flutter/material.dart';
-import 'loadingscreen.dart';
+import 'Screens/loadingscreen.dart';
 
 void main() => runApp(MyApp());
 

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'constants.dart';
+import 'package:covid19_status/Components/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InformationScreen extends StatelessWidget {
@@ -47,11 +47,13 @@ class InformationScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 25.0,
                             fontWeight: FontWeight.bold,
+                            fontFamily: 'SourceSansPro',
                           ),),
                         Padding(padding: EdgeInsets.only(top: 10.0),),
                         Text('Flutter Developer/Enthusiast',
                           style: TextStyle(
-                              fontSize: 20.0
+                              fontSize: 20.0,
+                            fontFamily: 'SourceSansPro',
                           ),),
                         Padding(padding: EdgeInsets.only(top: 10.0),),
                         Divider(
@@ -117,6 +119,7 @@ class InformationScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'SourceSansPro',
                 ),),
               ),
             ),
@@ -128,6 +131,7 @@ class InformationScreen extends StatelessWidget {
                 child: Text('$bullet covid19india.org for India specific API.\n$bullet Fontawesomeicons for social media icons.\n$bullet Shutterstock for images and app icon.',
                   style: TextStyle(
                     fontSize: 19.0,
+                    fontFamily: 'SourceSansPro',
                   ),),
               ),
             ),
@@ -139,6 +143,7 @@ class InformationScreen extends StatelessWidget {
                     'WE ARE ALL IN THIS TOGETHER, WITH ♥',
                     style: TextStyle(
                         fontSize: 15.0,
+                      fontFamily: 'SourceSansPro',
                     ),
                   ),
                 ),

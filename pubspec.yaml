@@ -36,9 +36,18 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/
+
+  fonts:
+    - family: SourceSansPro
+      fonts:
+        - asset: fonts/SourceSansPro-Regular.ttf
+        - asset: fonts/SourceSansPro-Bold.ttf
+          weight: 500
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

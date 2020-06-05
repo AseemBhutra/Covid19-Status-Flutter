@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
-import 'datasource.dart';
+import 'package:covid19_status/Components/datasource.dart';
+import 'package:covid19_status/Components/constants.dart';
+
 class AboutTheDisease extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

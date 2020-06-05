@@ -1,8 +1,8 @@
 import 'dart:async';
+import 'package:covid19_status/Components/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:covid19_status/homescreen.dart';
-
+import 'package:covid19_status/Screens/homescreen.dart';
 class Loadingscreen extends StatefulWidget {
   @override
   _LoadingscreenState createState() => _LoadingscreenState();
@@ -30,6 +30,7 @@ class _LoadingscreenState extends State<Loadingscreen> {
    Widget build(BuildContext context) {
 
      return Scaffold(
+       backgroundColor: kBackgroundColor,
        body: Center(
          child: Column(
            mainAxisAlignment: MainAxisAlignment.center,

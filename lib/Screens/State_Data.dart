@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
-import 'package:covid19_status/Statescreen.dart';
-
+import 'package:covid19_status/Components/constants.dart';
+import 'package:covid19_status/Screens/Statescreen.dart';
 class StateDataScreen extends StatefulWidget {
   StateDataScreen({this.statedata});
   final  statedata;

@@ -1,6 +1,6 @@
-import 'package:covid19_status/constants.dart';
+import 'package:covid19_status/Components/constants.dart';
 import 'package:flutter/material.dart';
-import 'reusableCard.dart';
+import 'package:covid19_status/Components/reusableCard.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class StateScreen extends StatefulWidget {
