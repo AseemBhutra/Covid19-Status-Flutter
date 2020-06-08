@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:covid19_status/Components/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:covid19_status/Animations/FadeAnimation.dart';
 
 class InformationScreen extends StatelessWidget {
   void customLaunch(command) async{
@@ -43,18 +44,18 @@ class InformationScreen extends StatelessWidget {
                           backgroundImage: AssetImage('images/aseeem.jpeg'),
                         ),
                         Padding(padding: EdgeInsets.only(top: 10.0),),
-                        Text('ASEEM BHUTRA',
+                        FadeAnimation(1,Text('ASEEM BHUTRA',
                           style: TextStyle(
                             fontSize: 25.0,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'SourceSansPro',
-                          ),),
+                          ),)),
                         Padding(padding: EdgeInsets.only(top: 10.0),),
-                        Text('Flutter Developer/Enthusiast',
+                    FadeAnimation(1.2,Text('Flutter Developer/Enthusiast',
                           style: TextStyle(
                               fontSize: 20.0,
                             fontFamily: 'SourceSansPro',
-                          ),),
+                          ),)),
                         Padding(padding: EdgeInsets.only(top: 10.0),),
                         Divider(
                           color: Colors.white,
@@ -65,43 +66,43 @@ class InformationScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            IconButton(
+                            FadeAnimation(1.3,IconButton(
                               iconSize: kIconsize,
                               icon: FaIcon(FontAwesomeIcons.github),
                               onPressed: (){
                                 customLaunch('https://github.com/AseemBhutra');
                               },
-                            ),
+                            )),
                             SizedBox(
                               width: 10,
                             ),
-                            IconButton(
+                            FadeAnimation(1.4,IconButton(
                               iconSize: kIconsize,
                               icon: FaIcon(FontAwesomeIcons.instagram),
                               onPressed: (){
                                 customLaunch('http://www.instagram.com/aseemmaheshwari/');
                               },
-                            ),
+                            )),
                             SizedBox(
                               width: 10,
                             ),
-                            IconButton(
+                            FadeAnimation(1.5,IconButton(
                               icon: FaIcon(FontAwesomeIcons.facebook),
                               iconSize: kIconsize,
                               onPressed: (){
                                 customLaunch('http://www.facebook.com/aseem.bhutra.7');
                               },
-                            ),
+                            )),
                             SizedBox(
                               width: 10,
                             ),
-                            IconButton(
+                            FadeAnimation(1.6,IconButton(
                               icon: FaIcon(FontAwesomeIcons.linkedin),
                               iconSize: kIconsize,
                               onPressed: (){
                                 customLaunch('http://www.linkedin.com/in/aseem-bhutra-3b5329173');
                               },
-                            ),
+                            )),
                           ],
                         ),
                       ],
@@ -115,12 +116,12 @@ class InformationScreen extends StatelessWidget {
               margin: EdgeInsets.only(left: 25.0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Credits :',
+                child: FadeAnimation(1.3,Text('Credits :',
                 style: TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'SourceSansPro',
-                ),),
+                ),)),
               ),
             ),
             Padding(padding: EdgeInsets.only(top:5.0),),
@@ -128,24 +129,24 @@ class InformationScreen extends StatelessWidget {
               margin: EdgeInsets.only(left: 30.0,right: 5.0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text('$bullet covid19india.org for India specific API.\n$bullet Fontawesomeicons for social media icons.\n$bullet Shutterstock for images and app icon.',
+                child: FadeAnimation(1.4,Text('$bullet covid19india.org for India specific API.\n$bullet Fontawesomeicons for social media icons.\n$bullet Shutterstock for images and app icon.',
                   style: TextStyle(
                     fontSize: 19.0,
                     fontFamily: 'SourceSansPro',
-                  ),),
+                  ),)),
               ),
             ),
             Expanded(
               child: Container(
                 child:Align(
                   alignment: Alignment.bottomCenter,
-                  child: Text(
+                  child: FadeAnimation(1.3,Text(
                     'WE ARE ALL IN THIS TOGETHER, WITH ♥',
                     style: TextStyle(
                         fontSize: 15.0,
                       fontFamily: 'SourceSansPro',
                     ),
-                  ),
+                  )),
                 ),
               ),
             ),

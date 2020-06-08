@@ -1,3 +1,4 @@
+import 'package:covid19_status/Animations/FadeAnimation.dart';
 import 'package:covid19_status/Screens/aboutthedisease.dart';
 import 'package:covid19_status/Components/constants.dart';
 import 'package:covid19_status/Screens/informationScreen.dart';
@@ -7,6 +8,7 @@ import 'package:covid19_status/Components/reusableCard.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:covid19_status/Screens/State_Data.dart';
 import 'package:covid19_status/Components/Networking.dart';
+
 
 class Homescreen extends StatefulWidget {
 
@@ -97,29 +99,29 @@ class _HomescreenState extends State<Homescreen> {
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('Confirmed',
+                        FadeAnimation(1, Text('Confirmed',
                         style: TextStyle(
                           color:Colors.yellow,
                           fontSize: kHeadcontSize,
                         ),
-                        ),
+                        )),
                         SizedBox(
                           height: kSizedboxheight,
                         ),
-                        Text(
+                        FadeAnimation(1.2,Text(
                           data['statewise'][0]['confirmed'],
                           style: kTitleTextstyle,
-                        ),
+                        )),
                         SizedBox(
                           height: kSizedboxheight,
                         ),
-                        Text(
+                        FadeAnimation(1.3,Text(
                           '+ ${data['statewise'][0]['deltaconfirmed']}',
                           style: TextStyle(
                             fontSize: kTailContSize,
                             color: Colors.yellow,
                           ),
-                        ),
+                        )),
                       ],
                     ),
                     ),
@@ -130,19 +132,19 @@ class _HomescreenState extends State<Homescreen> {
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Active',
+                          FadeAnimation(1.4,Text('Active',
                             style: TextStyle(
                               color:Colors.blue,
                               fontSize: kHeadcontSize,
                             ),
-                          ),
+                          )),
                           SizedBox(
                             height: kSizedboxheight,
                           ),
-                          Text(
+                      FadeAnimation(1.5,Text(
                             data['statewise'][0]['active'],
                             style: kTitleTextstyle,
-                          ),
+                          )),
                           SizedBox(
                             height: kSizedboxheight,
                           ),
@@ -161,29 +163,29 @@ class _HomescreenState extends State<Homescreen> {
                         cardChild: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text('Recovered',
+                          FadeAnimation(1.6,Text('Recovered',
                               style: TextStyle(
                                 color:Colors.green,
                                 fontSize: kHeadcontSize,
                               ),
-                            ),
+                            )),
                             SizedBox(
                               height: kSizedboxheight,
                             ),
-                            Text(
+                        FadeAnimation(1.7,Text(
                               data['statewise'][0]['recovered'],
                               style: kTitleTextstyle,
-                            ),
+                            )),
                             SizedBox(
                               height: kSizedboxheight,
                             ),
-                            Text(
+                        FadeAnimation(1.8,Text(
                               '+ ${data['statewise'][0]['deltarecovered']}',
                               style: TextStyle(
                                   fontSize: kTailContSize,
                                   color: Colors.green,
                               ),
-                            ),
+                            )),
                           ],
                         ),
                       ),
@@ -193,29 +195,29 @@ class _HomescreenState extends State<Homescreen> {
                         cardChild: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text('Deceased',
+                          FadeAnimation(1.9,Text('Deceased',
                               style: TextStyle(
                                 color:Colors.red,
                                 fontSize: kHeadcontSize,
                               ),
-                            ),
+                            )),
                             SizedBox(
                               height: kSizedboxheight,
                             ),
-                            Text(
+                        FadeAnimation(1.10,Text(
                               data['statewise'][0]['deaths'],
                               style: kTitleTextstyle,
-                            ),
+                            )),
                             SizedBox(
                               height: kSizedboxheight,
                             ),
-                            Text(
+                        FadeAnimation(1.11,Text(
                               '+ ${data['statewise'][0]['deltadeaths']}',
                               style: TextStyle(
                                   fontSize: kTailContSize,
                                   color: Colors.red,
                               ),
-                            ),
+                            )),
                           ],
                         ),
                       ),
@@ -230,33 +232,33 @@ class _HomescreenState extends State<Homescreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Center(
-                        child: Text('Last Updated',
+                        child: FadeAnimation(1.12,Text('Last Updated',
                           style: TextStyle(
                             color:Colors.orange,
                             fontSize: kHeadcontSize,
                           ),
-                        ),
+                        )),
                       ),
                       SizedBox(
                         height: kSizedboxheight,
                       ),
                       Center(
-                        child: Text(
+                        child: FadeAnimation(1.13,Text(
                           data['statewise'][0]['lastupdatedtime'].toString().split(' ')[0],
                           style: kTitleTextstyle,
-                        ),
+                        )),
                       ),
                       SizedBox(
                         height: kSizedboxheight,
                       ),
                       Center(
-                        child: Text(
+                        child: FadeAnimation(1.14,Text(
                           data['statewise'][0]['lastupdatedtime'].toString().split(' ')[1],
                           style: TextStyle(
                             fontSize: kTailContSize,
                             color: Colors.orange,
                           ),
-                        ),
+                        )),
                       ),
                     ],
                   ),

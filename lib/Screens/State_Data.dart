@@ -1,3 +1,4 @@
+import 'package:covid19_status/Animations/FadeAnimation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Components/constants.dart';
@@ -47,22 +48,47 @@ class _StateDataScreenState extends State<StateDataScreen> {
                   borderRadius: BorderRadius.circular(10),
                   color: kContainerColor,
                 ),
-                height: 65,
+                height: 70,
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Container(
-                  color: kContainerColor,
-                  width: 170,
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        data['statewise'][index]['state'],
-                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      color: kContainerColor,
+                      width: 175,
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          FadeAnimation(1,Text(
+                            data['statewise'][index]['state'],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0,
+                            fontFamily: 'SourceSansPro'),
+                          )),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      color: kContainerColor,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(width: 30,),
+                      FadeAnimation(1.2,Text(
+                            data['statewise'][index]['confirmed'],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0,
+                                fontFamily: 'SourceSansPro',
+                            color: Colors.deepOrange),
+                      )),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Components/datasource.dart';
 import 'package:covid19_status/Components/constants.dart';
+import 'package:covid19_status/Animations/FadeAnimation.dart';
 
 class AboutTheDisease extends StatelessWidget {
   @override
@@ -17,15 +18,20 @@ class AboutTheDisease extends StatelessWidget {
         itemCount: DataSource.questionAnswers.length,
         itemBuilder: (context, index) {
           return ExpansionTile(
-            title: Text(
+            title: FadeAnimation(1,Text(
               DataSource.questionAnswers[index]['question'],
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+              style: TextStyle(fontWeight: FontWeight.bold,
+                  fontFamily: 'SourceSansPro',
+                  fontSize: 18.0),
+            )),
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                    DataSource.questionAnswers[index]['answer']),
+                    DataSource.questionAnswers[index]['answer'],
+                  style: TextStyle(
+                      fontFamily: 'SourceSansPro',
+                      fontSize: 18.0),),
               )
             ],
           );

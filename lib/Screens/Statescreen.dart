@@ -2,6 +2,7 @@ import 'package:covid19_status/Components/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Components/reusableCard.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:covid19_status/Animations/FadeAnimation.dart';
 
 class StateScreen extends StatefulWidget {
   final index;
@@ -72,29 +73,29 @@ int sindex;
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Confirmed',
+                        FadeAnimation(1,Text('Confirmed',
                             style: TextStyle(
                               color:Colors.yellow,
                               fontSize: kHeadcontSize,
                             ),
-                          ),
+                          )),
                           SizedBox(
                             height: kSizedboxheight,
                           ),
-                          Text(
+                      FadeAnimation(1.2,Text(
                             sdata['statewise'][sindex]['confirmed'],
                             style: kTitleTextstyle,
-                          ),
+                        )),
                           SizedBox(
                             height: kSizedboxheight,
                           ),
-                          Text(
+                      FadeAnimation(1.3,Text(
                             '+ ${sdata['statewise'][sindex]['deltaconfirmed']}',
                             style: TextStyle(
                               fontSize: kTailContSize,
                               color: Colors.yellow,
                             ),
-                          ),
+                      )),
                         ],
                       ),
                     ),
@@ -105,19 +106,19 @@ int sindex;
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Active',
+                        FadeAnimation(1.4,Text('Active',
                             style: TextStyle(
                               color:Colors.blue,
                               fontSize: kHeadcontSize,
                             ),
-                          ),
+                        )),
                           SizedBox(
                             height: kSizedboxheight,
                           ),
-                          Text(
+                      FadeAnimation(1.5,Text(
                             sdata['statewise'][sindex]['active'],
                             style: kTitleTextstyle,
-                          ),
+                          )),
                           SizedBox(
                             height: kSizedboxheight,
                           ),
@@ -136,28 +137,28 @@ int sindex;
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Recovered',
+                        FadeAnimation(1.6,Text('Recovered',
                             style: TextStyle(
                               color:Colors.green,
                               fontSize: kHeadcontSize,
                             ),
-                          ),
+                        )),
                           SizedBox(
                             height: kSizedboxheight,
                           ),
-                          Text(
+                      FadeAnimation(1.7,Text(
                             sdata['statewise'][sindex]['recovered'],
                             style: kTitleTextstyle,
-                          ),
+                          )),
                           SizedBox(
                             height: kSizedboxheight,
                           ),
-                          Text(
+                      FadeAnimation(1.8,Text(
                             '+ ${sdata['statewise'][sindex]['deltarecovered']}',
                             style: TextStyle(
                               fontSize: kTailContSize,
                               color: Colors.green,
-                            ),
+                            )),
                           ),
                         ],
                       ),
@@ -168,29 +169,29 @@ int sindex;
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Deceased',
+                        FadeAnimation(1.9,Text('Deceased',
                             style: TextStyle(
                               color:Colors.red,
                               fontSize: kHeadcontSize,
                             ),
-                          ),
+                          )),
                           SizedBox(
                             height: kSizedboxheight,
                           ),
-                          Text(
+                      FadeAnimation(1.10,Text(
                             sdata['statewise'][sindex]['deaths'],
                             style: kTitleTextstyle,
-                          ),
+                          )),
                           SizedBox(
                             height: kSizedboxheight,
                           ),
-                          Text(
+                      FadeAnimation(1.11,Text(
                             '+ ${sdata['statewise'][sindex]['deltadeaths']}',
                             style: TextStyle(
                               fontSize: kTailContSize,
                               color: Colors.red,
                             ),
-                          ),
+                      )),
                         ],
                       ),
                     ),
@@ -205,33 +206,33 @@ int sindex;
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Center(
-                      child: Text('Last Updated',
+                      child: FadeAnimation(1.12,Text('Last Updated',
                         style: TextStyle(
                           color:Colors.orange,
                           fontSize: kHeadcontSize,
                         ),
-                      ),
+                      )),
                     ),
                     SizedBox(
                       height: kSizedboxheight,
                     ),
                     Center(
-                      child: Text(
+                      child: FadeAnimation(1.13,Text(
                         sdata['statewise'][sindex]['lastupdatedtime'].toString().split(' ')[0],
                         style: kTitleTextstyle,
-                      ),
+                      )),
                     ),
                     SizedBox(
                       height: kSizedboxheight,
                     ),
                     Center(
-                      child: Text(
+                      child: FadeAnimation(1.14,Text(
                         sdata['statewise'][sindex]['lastupdatedtime'].toString().split(' ')[1],
                         style: TextStyle(
                           fontSize: kTailContSize,
                           color: Colors.orange,
                         ),
-                      ),
+                      )),
                     ),
                   ],
                 ),
