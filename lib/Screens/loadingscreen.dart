@@ -31,12 +31,18 @@ class _LoadingscreenState extends State<Loadingscreen> {
 
      return Scaffold(
        backgroundColor: kBackgroundColor,
-       body: Center(
+       body: Container(
+         height: MediaQuery.of(context).size.height,
          child: Column(
+           //crossAxisAlignment: CrossAxisAlignment.center,
            mainAxisAlignment: MainAxisAlignment.center,
            children: <Widget>[
-             Container(
-               child: Image.asset('images/abc.png'),
+             Center(
+               child: Container(
+                 child: Image.asset('images/abc.png',
+                 height: 250,
+                 width: 250,),
+               ),
              ),
              //Padding(padding: EdgeInsets.only(top: 20.0)),
              Text(
@@ -48,30 +54,43 @@ class _LoadingscreenState extends State<Loadingscreen> {
              ),
              Padding(padding: EdgeInsets.only(top: 10.0),),
              Text(
-               'v1.0',
+               '2.0',
                style: TextStyle(
                  fontSize: 15.0,
                  color: Colors.white,
                ),
              ),
-             Padding(padding: EdgeInsets.only(top: 20.0),),
-             CircularProgressIndicator(
-               backgroundColor: Colors.white,
-               strokeWidth: 3.0,
-             ),
-             Padding(padding: EdgeInsets.only(bottom: 20.0),),
-           Expanded(
-             child:Align(
-               alignment: Alignment.bottomCenter,
-               child: Text(
-                 'Developed by Aseem Bhutra',
-                 style: TextStyle(
-                   fontSize: 15.0
-                 ),
+
+             //Padding(padding: EdgeInsets.only(bottom: 120.0),),
+
+             Container(
+               height: MediaQuery.of(context).size.height/3,
+               child: Column(
+                 mainAxisAlignment: MainAxisAlignment.end,
+                 mainAxisSize: MainAxisSize.max,
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                 children: <Widget>[
+                   Text(
+                     'MADE WITH ♥ IN INDIA',
+                     style: TextStyle(
+                       fontSize: 15.0,
+                       fontFamily: 'SourceSansPro',
+                     ),
+                   ),
+                   SizedBox(height: 10,),
+                   Text(
+                     'Developed by Aseem Bhutra',
+                     style: TextStyle(
+                       fontSize: 15.0,
+                       fontFamily: 'SourceSansPro',
+                     ),
+                   ),
+                 ],
                ),
              ),
-           ),
-             Padding(padding: EdgeInsets.only(bottom: 40.0),),
+
+
+          //   Padding(padding: EdgeInsets.only(bottom: 20.0),),
            ],
          ),
        ),

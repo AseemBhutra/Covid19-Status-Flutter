@@ -136,21 +136,21 @@ class InformationScreen extends StatelessWidget {
                   ),)),
               ),
             ),
-            Expanded(
-              child: Container(
-                child:Align(
-                  alignment: Alignment.bottomCenter,
-                  child: FadeAnimation(1.3,Text(
-                    'WE ARE ALL IN THIS TOGETHER, WITH ♥',
-                    style: TextStyle(
-                        fontSize: 15.0,
-                      fontFamily: 'SourceSansPro',
-                    ),
-                  )),
-                ),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(bottom: 40.0),),
+//            Expanded(
+//              child: Container(
+//                child:Align(
+//                  alignment: Alignment.bottomCenter,
+//                  child: FadeAnimation(1.3,Text(
+//                    'WE ARE ALL IN THIS TOGETHER, WITH ♥',
+//                    style: TextStyle(
+//                        fontSize: 15.0,
+//                      fontFamily: 'SourceSansPro',
+//                    ),
+//                  )),
+//                ),
+//              ),
+//            ),
+//            Padding(padding: EdgeInsets.only(bottom: 40.0),),
           ],
 
         ),
