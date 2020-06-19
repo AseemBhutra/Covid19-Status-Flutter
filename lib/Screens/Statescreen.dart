@@ -2,37 +2,64 @@ import 'package:covid19_status/Components/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Components/reusableCard.dart';
 import 'package:pie_chart/pie_chart.dart';
-import 'package:covid19_status/Animations/FadeAnimation.dart';
+//import 'package:covid19_status/Screens/districtdata.dart';
+import 'package:intl/intl.dart';
 
 class StateScreen extends StatefulWidget {
-  final index;
   final data;
-  StateScreen({this.index,this.data});
+  final statecode;
+  StateScreen({this.data, this.statecode});
   @override
   _StateScreenState createState() => _StateScreenState();
 }
 
 class _StateScreenState extends State<StateScreen> {
 Map sdata;
-int sindex;
+String scode;
+
+
   @override
   void initState() {
     super.initState();
-  getdata(widget.index,widget.data);
+  getdata(widget.data,widget.statecode);
   }
 
-  getdata(index,data){
-    sindex = index;
+
+  DateTime mdate;
+  String dateFormat;
+  String timeFormat;
+  getdata(data,statecode){
     sdata = data;
+    scode = statecode;
+    //print(scode);
+    formatTime();
+    getIndex();
+  }
+int acode = 0;
+  getIndex(){
+    for(int i = 0; i<sdata['statewise'].length;i++){
+     if(scode == sdata['statewise'][i]['statecode']){
+       acode = i;
+       print(acode);
+       print(scode);
+     }
+    }
+  }
+
+  formatTime(){
+    mdate = DateFormat('dd/MM/yyyy HH:mm').parse(sdata['statewise'][acode]['lastupdatedtime']);
+    dateFormat = DateFormat("dd MMM yyyy").format(mdate);
+    timeFormat = DateFormat("hh:mm a").format(mdate);
   }
 
   @override
   Widget build(BuildContext context) {
+    //print(statedata);
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        title: Text(sdata['statewise'][sindex]['state'].toString().toUpperCase(),),
+        title: Text(sdata['statewise'][acode]['state'].toString().toUpperCase(),),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
@@ -48,19 +75,15 @@ int sindex;
                 ),
                 child: PieChart(
                   dataMap: {
-                    'Confirmed': double.parse(sdata['statewise'][sindex]['confirmed']),
-                    'Active': double.parse(sdata['statewise'][sindex]['active']),
-                    'Recovered': double.parse(sdata['statewise'][sindex]['recovered']),
-                    'Deceased':double.parse(sdata['statewise'][sindex]['deaths'])
+                    'Active': double.parse(sdata['statewise'][acode]['active']),
+                    'Recovered': double.parse(sdata['statewise'][acode]['recovered']),
+                    'Deceased':double.parse(sdata['statewise'][acode]['deaths'])
                   },
                   colorList: [
-                    Colors.yellow,
-                    Colors.blue,
-                    Colors.green,
-                    Colors.red,
+                    kPiechartactivecolor,
+                    kPiechartrecoveredcolor,
+                    kPiechartdeathcolor,
                   ],
-
-
                 ),
               ),
             ),
@@ -69,61 +92,19 @@ int sindex;
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: ReusableCard(colour: kContainerColor,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                        FadeAnimation(1,Text('Confirmed',
-                            style: TextStyle(
-                              color:Colors.yellow,
-                              fontSize: kHeadcontSize,
-                            ),
-                          )),
-                          SizedBox(
-                            height: kSizedboxheight,
-                          ),
-                      FadeAnimation(1.2,Text(
-                            sdata['statewise'][sindex]['confirmed'],
-                            style: kTitleTextstyle,
-                        )),
-                          SizedBox(
-                            height: kSizedboxheight,
-                          ),
-                      FadeAnimation(1.3,Text(
-                            '+ ${sdata['statewise'][sindex]['deltaconfirmed']}',
-                            style: TextStyle(
-                              fontSize: kTailContSize,
-                              color: Colors.yellow,
-                            ),
-                      )),
-                        ],
-                      ),
+                    child: ReusableCard(
+                      l1: 'Confirmed',
+                      l2: sdata['statewise'][acode]['confirmed'].replaceAllMapped(kreg, kmathFunc),
+                      l3: '+ ${sdata['statewise'][acode]['deltaconfirmed']}'.replaceAllMapped(kreg, kmathFunc),
+                      color: kConfirmedcolor,
                     ),
-
                   ),
                   Expanded(
-                    child: ReusableCard(colour: kContainerColor,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                        FadeAnimation(1.4,Text('Active',
-                            style: TextStyle(
-                              color:Colors.blue,
-                              fontSize: kHeadcontSize,
-                            ),
-                        )),
-                          SizedBox(
-                            height: kSizedboxheight,
-                          ),
-                      FadeAnimation(1.5,Text(
-                            sdata['statewise'][sindex]['active'],
-                            style: kTitleTextstyle,
-                          )),
-                          SizedBox(
-                            height: kSizedboxheight,
-                          ),
-                        ],
-                      ),
+                    child: ReusableCard(
+                      l1: 'Active',
+                      l2: sdata['statewise'][acode]['active'].replaceAllMapped(kreg, kmathFunc),
+                      l3: '',
+                      color: kActivecolor,
                     ),
                   ),
                 ],
@@ -133,111 +114,72 @@ int sindex;
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: ReusableCard(colour: kContainerColor,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                        FadeAnimation(1.6,Text('Recovered',
-                            style: TextStyle(
-                              color:Colors.green,
-                              fontSize: kHeadcontSize,
-                            ),
-                        )),
-                          SizedBox(
-                            height: kSizedboxheight,
-                          ),
-                      FadeAnimation(1.7,Text(
-                            sdata['statewise'][sindex]['recovered'],
-                            style: kTitleTextstyle,
-                          )),
-                          SizedBox(
-                            height: kSizedboxheight,
-                          ),
-                      FadeAnimation(1.8,Text(
-                            '+ ${sdata['statewise'][sindex]['deltarecovered']}',
-                            style: TextStyle(
-                              fontSize: kTailContSize,
-                              color: Colors.green,
-                            )),
-                          ),
-                        ],
-                      ),
+                    child: ReusableCard(
+                      l1: 'Recovered',
+                      l2: sdata['statewise'][acode]['recovered'].replaceAllMapped(kreg, kmathFunc),
+                      l3: '+ ${sdata['statewise'][acode]['deltarecovered']}'.replaceAllMapped(kreg, kmathFunc),
+                      color: kRecoveredcolor,
                     ),
                   ),
                   Expanded(
-                    child: ReusableCard(colour: kContainerColor,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                        FadeAnimation(1.9,Text('Deceased',
-                            style: TextStyle(
-                              color:Colors.red,
-                              fontSize: kHeadcontSize,
-                            ),
-                          )),
-                          SizedBox(
-                            height: kSizedboxheight,
-                          ),
-                      FadeAnimation(1.10,Text(
-                            sdata['statewise'][sindex]['deaths'],
-                            style: kTitleTextstyle,
-                          )),
-                          SizedBox(
-                            height: kSizedboxheight,
-                          ),
-                      FadeAnimation(1.11,Text(
-                            '+ ${sdata['statewise'][sindex]['deltadeaths']}',
-                            style: TextStyle(
-                              fontSize: kTailContSize,
-                              color: Colors.red,
-                            ),
-                      )),
-                        ],
-                      ),
+                    child: ReusableCard(
+                      l1: 'Deceased',
+                      l2: sdata['statewise'][acode]['deaths'].replaceAllMapped(kreg, kmathFunc),
+                      l3: '+ ${sdata['statewise'][acode]['deltadeaths']}'.replaceAllMapped(kreg, kmathFunc),
+                      color: kDeceasedcolor,
                     ),
                   ),
                 ],
               ),
             ),
-            Expanded(
-              child: ReusableCard(colour: kContainerColor,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Center(
-                      child: FadeAnimation(1.12,Text('Last Updated',
-                        style: TextStyle(
-                          color:Colors.orange,
-                          fontSize: kHeadcontSize,
-                        ),
-                      )),
+
+    Container(
+              height: 120,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: ReusableCard(
+                      l1: 'Last Updated',
+                      l2: timeFormat,
+                      l3: dateFormat,
+                      color: kLastupdatedcolor,
                     ),
-                    SizedBox(
-                      height: kSizedboxheight,
-                    ),
-                    Center(
-                      child: FadeAnimation(1.13,Text(
-                        sdata['statewise'][sindex]['lastupdatedtime'].toString().split(' ')[0],
-                        style: kTitleTextstyle,
-                      )),
-                    ),
-                    SizedBox(
-                      height: kSizedboxheight,
-                    ),
-                    Center(
-                      child: FadeAnimation(1.14,Text(
-                        sdata['statewise'][sindex]['lastupdatedtime'].toString().split(' ')[1],
-                        style: TextStyle(
-                          fontSize: kTailContSize,
-                          color: Colors.orange,
-                        ),
-                      )),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
+//
+//            Container(
+//              child: Row(
+//                children: <Widget>[
+//                  Expanded(
+//                    child: GestureDetector(
+//                      //padding: EdgeInsets.all(0),
+//                      onTap: (){
+//                        Navigator.push(context, MaterialPageRoute(builder: (context) => DistrictData(name: sdata['statewise'][sindex]['state'],)));
+//                      },
+//                      child: Container(
+//                        height: 60,
+//                        margin: EdgeInsets.all(5.0),
+//                        decoration: BoxDecoration(
+//                          color: kContainerColor,
+//                          borderRadius: BorderRadius.circular(10.0),
+//                        ),
+//                        child: Center(
+//                          child: Text(
+//                            'District data'+ ' of '+ sdata['statewise'][sindex]['state'].toString(),
+//                            style: TextStyle(
+//                              fontSize: kHeadcontSize,
+//                              color: kTestscolor,
+//                            ),
+//                          ),
+//                        ),
+//                      ),
+//                    ),
+//                  ),
+//                ],
+//              ),
+//            ),
           ],
         ),
       ),

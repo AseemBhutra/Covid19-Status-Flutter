@@ -129,7 +129,7 @@ class InformationScreen extends StatelessWidget {
               margin: EdgeInsets.only(left: 30.0,right: 5.0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: FadeAnimation(1.4,Text('$bullet covid19india.org for India specific API.\n$bullet Fontawesomeicons for social media icons.\n$bullet Shutterstock for images and app icon.',
+                child: FadeAnimation(1.4,Text('$bullet covid19india.org for India specific API.\n$bullet Fontawesomeicons for social media icons.\n$bullet Vipul Jha for Design.',
                   style: TextStyle(
                     fontSize: 19.0,
                     fontFamily: 'SourceSansPro',

@@ -1,5 +1,5 @@
-import 'package:covid19_status/Animations/FadeAnimation.dart';
-import 'package:covid19_status/Screens/aboutthedisease.dart';
+import 'package:covid19_status/Screens/history.dart';
+import 'package:covid19_status/Screens/worlddata.dart';
 import 'package:covid19_status/Components/constants.dart';
 import 'package:covid19_status/Screens/informationScreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,10 +8,11 @@ import 'package:covid19_status/Components/reusableCard.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:covid19_status/Screens/State_Data.dart';
 import 'package:covid19_status/Components/Networking.dart';
+import 'package:intl/intl.dart';
+
 
 
 class Homescreen extends StatefulWidget {
-
 
   @override
   _HomescreenState createState() => _HomescreenState();
@@ -25,14 +26,23 @@ class _HomescreenState extends State<Homescreen> {
     getdata();
   }
   Map data;
-  void getdata()async{
+  DateTime mdate ;
+  String dateFormat;
+  String timeFormat;
+  List abc;
+
+  Future getdata()async{
     var url = 'https://api.covid19india.org/data.json';
     Networkhelper networkhelper = Networkhelper(url);
     var countrydata = await networkhelper.getData();
     setState(() {
       data = countrydata;
     });
-  }
+    mdate = DateFormat('dd/MM/yyyy HH:mm').parse(data['statewise'][0]['lastupdatedtime']);
+    dateFormat = DateFormat("dd MMM yyyy").format(mdate);
+    timeFormat = DateFormat("hh:mm a").format(mdate);
+    }
+
 
 
   @override
@@ -40,9 +50,26 @@ class _HomescreenState extends State<Homescreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        title: Text('Covid-19 Status'),
+        title: Row(
+          children: <Widget>[
+            Text('Covid-19 Status'),
+            Text(' (INDIA)',style: TextStyle(color: Color(0xffff9933)),),
+          ],
+        ),
         actions: <Widget>[
          Tooltip(
+            message: 'History',
+            child: IconButton(
+              icon: Icon(Icons.history,
+                  color: Colors.white),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return History(history: data,);
+                }));
+              },
+            ),
+          ),
+          Tooltip(
            message: 'info',
            child: IconButton(
             icon: Icon(Icons.info_outline,
@@ -59,285 +86,166 @@ class _HomescreenState extends State<Homescreen> {
       backgroundColor: kBackgroundColor,
       body: data==null ?
         Center(child: CircularProgressIndicator())
-          : Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
-            child: Container(
-              child: Column(
+          : RefreshIndicator(
+        onRefresh: getdata,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: double.infinity,
+                child: Column(
         children: <Widget>[
         Expanded(
-              flex: 2,
-              child: Container(
-                margin: EdgeInsets.all(5.0),
-                decoration: BoxDecoration(
-                  color: kContainerColor,
-                  borderRadius: BorderRadius.circular(10.0),
+            flex: 1,
+                child: Container(
+                  margin: EdgeInsets.all(5.0),
+                  decoration: BoxDecoration(
+                    color: kContainerColor,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                child: PieChart(
+                  dataMap: {
+                    'Active': double.parse(data['statewise'][0]['active']),
+                    'Recovered': double.parse(data['statewise'][0]['recovered']),
+                    'Deceased':double.parse(data['statewise'][0]['deaths'])
+                  },
+                  colorList: [
+                    kPiechartactivecolor,
+                    kPiechartrecoveredcolor,
+                    kPiechartdeathcolor,
+                  ],
                 ),
-              child: PieChart(
-                dataMap: {
-                  'Confirmed': double.parse(data['statewise'][0]['confirmed']),
-                  'Active': double.parse(data['statewise'][0]['active']),
-                  'Recovered': double.parse(data['statewise'][0]['recovered']),
-                  'Deceased':double.parse(data['statewise'][0]['deaths'])
-                },
-                colorList: [
-                  Colors.yellow,
-                  Colors.blue,
-                  Colors.green,
-                  Colors.red,
-                ],
-
-
-              ),
-              ),
+                ),
         ),
 
         Expanded(
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: ReusableCard(colour: kContainerColor,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        FadeAnimation(1, Text('Confirmed',
-                        style: TextStyle(
-                          color:Colors.yellow,
-                          fontSize: kHeadcontSize,
-                        ),
-                        )),
-                        SizedBox(
-                          height: kSizedboxheight,
-                        ),
-                        FadeAnimation(1.2,Text(
-                          data['statewise'][0]['confirmed'],
-                          style: kTitleTextstyle,
-                        )),
-                        SizedBox(
-                          height: kSizedboxheight,
-                        ),
-                        FadeAnimation(1.3,Text(
-                          '+ ${data['statewise'][0]['deltaconfirmed']}',
-                          style: TextStyle(
-                            fontSize: kTailContSize,
-                            color: Colors.yellow,
-                          ),
-                        )),
-                      ],
-                    ),
-                    ),
-
-                  ),
-                  Expanded(
-                    child: ReusableCard(colour: kContainerColor,
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          FadeAnimation(1.4,Text('Active',
-                            style: TextStyle(
-                              color:Colors.blue,
-                              fontSize: kHeadcontSize,
-                            ),
-                          )),
-                          SizedBox(
-                            height: kSizedboxheight,
-                          ),
-                      FadeAnimation(1.5,Text(
-                            data['statewise'][0]['active'],
-                            style: kTitleTextstyle,
-                          )),
-                          SizedBox(
-                            height: kSizedboxheight,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-        ),
-              Expanded(
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: ReusableCard(colour: kContainerColor,
-                        cardChild: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                          FadeAnimation(1.6,Text('Recovered',
-                              style: TextStyle(
-                                color:Colors.green,
-                                fontSize: kHeadcontSize,
-                              ),
-                            )),
-                            SizedBox(
-                              height: kSizedboxheight,
-                            ),
-                        FadeAnimation(1.7,Text(
-                              data['statewise'][0]['recovered'],
-                              style: kTitleTextstyle,
-                            )),
-                            SizedBox(
-                              height: kSizedboxheight,
-                            ),
-                        FadeAnimation(1.8,Text(
-                              '+ ${data['statewise'][0]['deltarecovered']}',
-                              style: TextStyle(
-                                  fontSize: kTailContSize,
-                                  color: Colors.green,
-                              ),
-                            )),
-                          ],
+                      child: ReusableCard(
+                        l1: 'Confirmed',
+                        l2: "${data['statewise'][0]['confirmed']}".replaceAllMapped(kreg, kmathFunc),
+                        l3: '+ ${data['statewise'][0]['deltaconfirmed']}'.replaceAllMapped(kreg, kmathFunc),
+                        color: kConfirmedcolor,
                         ),
                       ),
-                    ),
                     Expanded(
-                      child: ReusableCard(colour: kContainerColor,
-                        cardChild: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                          FadeAnimation(1.9,Text('Deceased',
-                              style: TextStyle(
-                                color:Colors.red,
-                                fontSize: kHeadcontSize,
-                              ),
-                            )),
-                            SizedBox(
-                              height: kSizedboxheight,
-                            ),
-                        FadeAnimation(1.10,Text(
-                              data['statewise'][0]['deaths'],
-                              style: kTitleTextstyle,
-                            )),
-                            SizedBox(
-                              height: kSizedboxheight,
-                            ),
-                        FadeAnimation(1.11,Text(
-                              '+ ${data['statewise'][0]['deltadeaths']}',
-                              style: TextStyle(
-                                  fontSize: kTailContSize,
-                                  color: Colors.red,
-                              ),
-                            )),
-                          ],
+                      child: ReusableCard(
+                        l1: 'Active',
+                        l2: data['statewise'][0]['active'].replaceAllMapped(kreg, kmathFunc),
+                        l3: '',
+                        color: kActivecolor,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ReusableCard(colour: kContainerColor,
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    ],
+                  ),
+                 ),
+                Expanded(
+                  child: Row(
                     children: <Widget>[
-                      Center(
-                        child: FadeAnimation(1.12,Text('Last Updated',
-                          style: TextStyle(
-                            color:Colors.orange,
-                            fontSize: kHeadcontSize,
-                          ),
-                        )),
+                      Expanded(
+                        child: ReusableCard(
+                          l1: 'Recovered',
+                          l2: data['statewise'][0]['recovered'].replaceAllMapped(kreg, kmathFunc),
+                          l3: '+ ${data['statewise'][0]['deltarecovered']}'.replaceAllMapped(kreg, kmathFunc),
+                          color: kRecoveredcolor,
+                        ),
                       ),
-                      SizedBox(
-                        height: kSizedboxheight,
-                      ),
-                      Center(
-                        child: FadeAnimation(1.13,Text(
-                          data['statewise'][0]['lastupdatedtime'].toString().split(' ')[0],
-                          style: kTitleTextstyle,
-                        )),
-                      ),
-                      SizedBox(
-                        height: kSizedboxheight,
-                      ),
-                      Center(
-                        child: FadeAnimation(1.14,Text(
-                          data['statewise'][0]['lastupdatedtime'].toString().split(' ')[1],
-                          style: TextStyle(
-                            fontSize: kTailContSize,
-                            color: Colors.orange,
-                          ),
-                        )),
+                      Expanded(
+                        child: ReusableCard(
+                          l1: 'Deceased',
+                          l2: data['statewise'][0]['deaths'].replaceAllMapped(kreg, kmathFunc),
+                          l3: '+ ${data['statewise'][0]['deltadeaths']}'.replaceAllMapped(kreg, kmathFunc),
+                          color: kDeceasedcolor,
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: GestureDetector(
-                        //padding: EdgeInsets.all(0),
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => AboutTheDisease()));
-                        },
-                        child: Container(
-
-                          margin: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                            color: kContainerColor,
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                           crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Center(
-                                child: Text(
-                                  'ABOUT THE \n   DISEASE',
-                                  style: TextStyle(
-                                    fontSize: kHeadcontSize,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: ReusableCard(
+                          l1: 'Samples Tested',
+                          l2: data['tested'].last['totalsamplestested'].replaceAllMapped(kreg, kmathFunc),
+                          l3: "+ ${data['tested'].last['samplereportedtoday']}".replaceAllMapped(kreg, kmathFunc),
+                          color: kTestscolor,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        //padding: EdgeInsets.all(0),
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => StateDataScreen(statedata: data)));
-                        },
-                        child: Container(
-
-                          margin: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                            color: kContainerColor,
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Center(
-                                child: Text(
-                                  'STATE DATA',
-                                  style: TextStyle(
-                                    fontSize: kHeadcontSize,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                      Expanded(
+                        child: ReusableCard(
+                          l1: 'Last Updated',
+                          l2: timeFormat,
+                          l3: dateFormat,
+                          color: kLastupdatedcolor,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: GestureDetector(
+                          //padding: EdgeInsets.all(0),
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => WorldData()));
+                          },
+                          child: Container(
+                            height: 60,
+                            margin: EdgeInsets.all(5.0),
+                            decoration: BoxDecoration(
+                              color: kContainerColor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'WORLD DATA ',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color(0xff6dd3a6),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          //padding: EdgeInsets.all(0),
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => StateDataScreen(statedata: data,)));
+                          },
+                          child: Container(
+                            height: 60,
+                            margin: EdgeInsets.all(5.0),
+                            decoration: BoxDecoration(
+                              color: kContainerColor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'STATE DATA',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color(0xffd11c42),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
         ],
       ),
+              ),
             ),
           ),
     );
   }
 }
-
 

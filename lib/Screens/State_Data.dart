@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Components/constants.dart';
 import 'package:covid19_status/Screens/Statescreen.dart';
+import 'package:covid19_status/Components/SearchState.dart';
+
+
 class StateDataScreen extends StatefulWidget {
   StateDataScreen({this.statedata});
   final  statedata;
@@ -13,7 +16,6 @@ class StateDataScreen extends StatefulWidget {
 
 class _StateDataScreenState extends State<StateDataScreen> {
   Map data;
-
   @override
   void initState() {
     super.initState();
@@ -30,6 +32,18 @@ class _StateDataScreenState extends State<StateDataScreen> {
       appBar: AppBar(
         title: Text('State Data'),
         backgroundColor: kBackgroundColor,
+//      actions: <Widget>[
+//        Tooltip(
+//            message: 'Search',
+//            child: IconButton(
+//              icon: Icon(Icons.search,
+//                  color: Colors.white),
+//              onPressed: (){
+//                showSearch(context: context,delegate: SearchState(statedata: data));
+//              },
+//            ),
+//          ),
+//      ],
       ),
       body: data == null
           ? Center(
@@ -39,7 +53,7 @@ class _StateDataScreenState extends State<StateDataScreen> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>StateScreen(data: data,index: index)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>StateScreen(data: data, statecode: data['statewise'][index+1]['statecode'])));
             },
             child: Card(
               color: kBackgroundColor,
@@ -52,6 +66,14 @@ class _StateDataScreenState extends State<StateDataScreen> {
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Row(
                   children: <Widget>[
+//                    SizedBox(width: 5,),
+//                    Text ('${index + 1} .',
+//                      style: TextStyle(
+//                          fontWeight: FontWeight.bold,
+//                          fontSize: 18.0,
+//                          fontFamily: 'SourceSansPro'),
+//                    ),
+//                    SizedBox(width: 5,),
                     Container(
                       color: kContainerColor,
                       width: 175,
@@ -61,7 +83,7 @@ class _StateDataScreenState extends State<StateDataScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           FadeAnimation(1,Text(
-                            data['statewise'][index]['state'],
+                            data['statewise'][index+1]['state'].toString(),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18.0,
@@ -78,7 +100,7 @@ class _StateDataScreenState extends State<StateDataScreen> {
                         children: <Widget>[
                           SizedBox(width: 30,),
                       FadeAnimation(1.2,Text(
-                            data['statewise'][index]['confirmed'],
+                            data['statewise'][index+1]['confirmed'].replaceAllMapped(kreg, kmathFunc),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18.0,
@@ -94,7 +116,7 @@ class _StateDataScreenState extends State<StateDataScreen> {
             ),
           );
         },
-        itemCount: data == null ? 0 : data['statewise'].length,
+        itemCount: data == null ? 0 : data['statewise'].length-1,
       ),
     );
   }
