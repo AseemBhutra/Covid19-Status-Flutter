@@ -94,30 +94,32 @@ class _CountryDataScreenState extends State<CountryDataScreen> {
                         ),
                       ),
                       SizedBox(width: 5,),
-                      Container(
-                        color: kContainerColor,
-                        width: 175,
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            FadeAnimation(1,Text(
-                            data[index]['country'],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
-                                  fontFamily: 'SourceSansPro'),
-                            )),
-                          ],
+                      Expanded(
+                        child: Container(
+                          color: kContainerColor,
+                          //width: 135,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              FadeAnimation(1,Text(
+                              data[index]['country'],
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    fontFamily: 'SourceSansPro'),
+                              )),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         child: Container(
                           color: kContainerColor,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            //crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
                               FadeAnimation(1.2,Text(
                                 data[index]['cases'].toString().replaceAllMapped(kreg, kmathFunc),
@@ -127,6 +129,7 @@ class _CountryDataScreenState extends State<CountryDataScreen> {
                                     fontFamily: 'SourceSansPro',
                                     color: Colors.deepOrange),
                               )),
+                              SizedBox(width: 8,),
                             ],
                           ),
                         ),

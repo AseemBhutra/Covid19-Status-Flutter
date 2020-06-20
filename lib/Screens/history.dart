@@ -12,9 +12,8 @@ class History extends StatefulWidget {
 
 class _HistoryState extends State<History> {
 
-  List date = [];
-  List tCases = [];
-  List cases = [];
+  List<String> date = [];
+  List<String> cases = [];
   @override
   void initState() {
     getdata(widget.history);
@@ -25,9 +24,10 @@ Map data;
     data = history;
     for(int i=data['cases_time_series'].length-1; i >= 0 ;i--) {
       date.add(data['cases_time_series'][i]['date'].toString());
-      cases.add(data['cases_time_series'][i]['totalconfirmed'].toString());
-      tCases.add(data['cases_time_series'][i]['dailyconfirmed'].toString());
+      cases.add(data['cases_time_series'][i]['totalconfirmed'].toString() + ' ('+data['cases_time_series'][i]['dailyconfirmed'].toString() +')');
     }
+//    Map<String , String> map = Map.fromIterables(date, cases);
+//    print(map);
   }
 
   @override
@@ -109,7 +109,7 @@ Map data;
                           Row(
                             children: <Widget>[
                               FadeAnimation(1.2,Text(
-                                cases[index].toString().replaceAllMapped(kreg, kmathFunc),
+                                cases[index].toString().split(' ')[0].replaceAllMapped(kreg, kmathFunc),
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
@@ -117,7 +117,7 @@ Map data;
                                     color: Colors.white),
                               )),
                               FadeAnimation(1.2,Text(
-                                '  ('+'+'+ tCases[index].toString().replaceAllMapped(kreg, kmathFunc)+')',
+                               ' ' +cases[index].toString().split(' ')[1].replaceAllMapped(kreg, kmathFunc),
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16.0,

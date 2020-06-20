@@ -37,29 +37,41 @@ class _LoadingscreenState extends State<Loadingscreen> {
            //crossAxisAlignment: CrossAxisAlignment.center,
            mainAxisAlignment: MainAxisAlignment.center,
            children: <Widget>[
-             Center(
-               child: Container(
-                 child: Image.asset('images/abc.png',
-                 height: 250,
-                 width: 250,),
+             Container(height: MediaQuery.of(context).size.height/3,),
+             Container(
+               height: MediaQuery.of(context).size.height/3,
+
+               child: Column(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: <Widget>[
+                   Center(
+                     child: Container(
+                       child: Image.asset('images/ab.png',
+                       height: 150,
+                       width: 150,),
+                     ),
+                   ),
+                   SizedBox(height: 10,),
+                   Text(
+                     'Covid-19 Status',
+                     style: TextStyle(
+                       fontSize: 25.0,
+                       color: Colors.white,
+                     ),
+                   ),
+                   Padding(padding: EdgeInsets.only(top: 10.0),),
+                   Text(
+                     '2.0',
+                     style: TextStyle(
+                       fontSize: 15.0,
+                       color: Colors.white,
+                     ),
+                   ),
+
+                 ],
                ),
              ),
              //Padding(padding: EdgeInsets.only(top: 20.0)),
-             Text(
-               'Covid-19 Status',
-               style: TextStyle(
-                 fontSize: 20.0,
-                 color: Colors.white,
-               ),
-             ),
-             Padding(padding: EdgeInsets.only(top: 10.0),),
-             Text(
-               '2.0',
-               style: TextStyle(
-                 fontSize: 15.0,
-                 color: Colors.white,
-               ),
-             ),
 
              //Padding(padding: EdgeInsets.only(bottom: 120.0),),
 
@@ -77,7 +89,7 @@ class _LoadingscreenState extends State<Loadingscreen> {
                        fontFamily: 'SourceSansPro',
                      ),
                    ),
-                   SizedBox(height: 10,),
+                   SizedBox(height: 8,),
                    Text(
                      'Developed by Aseem Bhutra',
                      style: TextStyle(
@@ -85,6 +97,7 @@ class _LoadingscreenState extends State<Loadingscreen> {
                        fontFamily: 'SourceSansPro',
                      ),
                    ),
+                   Padding(padding: EdgeInsets.only(bottom: 30.0),),
                  ],
                ),
              ),

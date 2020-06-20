@@ -40,8 +40,6 @@ int acode = 0;
     for(int i = 0; i<sdata['statewise'].length;i++){
      if(scode == sdata['statewise'][i]['statecode']){
        acode = i;
-       print(acode);
-       print(scode);
      }
     }
   }
@@ -54,7 +52,6 @@ int acode = 0;
 
   @override
   Widget build(BuildContext context) {
-    //print(statedata);
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -148,7 +145,7 @@ int acode = 0;
                 ],
               ),
             ),
-//
+
 //            Container(
 //              child: Row(
 //                children: <Widget>[
@@ -156,7 +153,7 @@ int acode = 0;
 //                    child: GestureDetector(
 //                      //padding: EdgeInsets.all(0),
 //                      onTap: (){
-//                        Navigator.push(context, MaterialPageRoute(builder: (context) => DistrictData(name: sdata['statewise'][sindex]['state'],)));
+//                        Navigator.push(context, MaterialPageRoute(builder: (context) => DistrictData(name: sdata['statewise'][acode]['state'],)));
 //                      },
 //                      child: Container(
 //                        height: 60,
@@ -167,7 +164,7 @@ int acode = 0;
 //                        ),
 //                        child: Center(
 //                          child: Text(
-//                            'District data'+ ' of '+ sdata['statewise'][sindex]['state'].toString(),
+//                            'District data'+ ' of '+ sdata['statewise'][acode]['state'].toString(),
 //                            style: TextStyle(
 //                              fontSize: kHeadcontSize,
 //                              color: kTestscolor,
