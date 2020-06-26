@@ -1,65 +1,60 @@
-import 'package:covid19_status/Animations/FadeAnimation.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Components/constants.dart';
+import 'package:covid19_status/Animations/FadeAnimation.dart';
 import 'package:covid19_status/Screens/Statescreen.dart';
-import 'package:covid19_status/Components/SearchState.dart';
 
+class SearchState extends SearchDelegate{
 
-class StateDataScreen extends StatefulWidget {
-  StateDataScreen({this.statedata});
-  final  statedata;
+  final Map statedata;
+  final List searchState;
+  SearchState({this.statedata,this.searchState});
 
   @override
-  _StateDataScreenState createState() => _StateDataScreenState();
-}
-
-class _StateDataScreenState extends State<StateDataScreen> {
-  Map data;
-  List statelist = [];
-  @override
-  void initState() {
-    super.initState();
-    getdata(widget.statedata);
-  }
-  getdata(statedata){
-    data = statedata;
-        for(int i = 1 ; i < data['statewise'].length ;i++) {
-          statelist.add(data['statewise'][i]['state'].toString()
-          +'  '+data['statewise'][i]['confirmed'].toString()
-          +'  '+data['statewise'][i]['statecode']);
-        }
+  ThemeData appBarTheme(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return theme.copyWith(
+      primaryColor: kBackgroundColor,
+    );
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        title: Text('State Data'.toUpperCase()),
-        backgroundColor: kBackgroundColor,
-     actions: <Widget>[
-       Tooltip(
-           message: 'Search',
-           child: IconButton(
-             icon: Icon(Icons.search,
-                 color: Colors.white),
-             onPressed: (){
-               showSearch(context: context,delegate: SearchState(statedata: data,searchState: statelist));
-             },
-           ),
-         ),
-     ],
-      ),
-      body: data == null
-          ? Center(
-        child: CircularProgressIndicator(),
-      )
-          : ListView.builder(
-        itemBuilder: (context, index) {
-          return GestureDetector(
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(icon: Icon(Icons.clear),
+        color: Colors.white,
+        onPressed: () {
+          query = '';
+        },),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(icon: Icon(Icons.arrow_back),
+      color: Colors.white,
+      onPressed: () {
+        Navigator.pop(context);
+      },);
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+  return Container();
+  }
+
+  @override
+   Widget buildSuggestions(BuildContext context) {
+   final suggestionlist = query.isEmpty ? searchState :
+   searchState.where((element) => element.toString().split('  ')[0].toLowerCase().contains(query)).toList();
+   print(suggestionlist);
+  return Scaffold(
+    backgroundColor: kBackgroundColor,
+    body: ListView.builder(
+      itemCount: suggestionlist == null ? 0 : suggestionlist.length,
+      itemBuilder: ( context, index){
+      return GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>StateScreen(data: data, statecode: statelist[index].toString().split('  ')[2])));
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>StateScreen(data: statedata, statecode: suggestionlist[index].toString().split('  ')[2])));
             },
             child: Card(
               color: kBackgroundColor,
@@ -89,7 +84,7 @@ class _StateDataScreenState extends State<StateDataScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           FadeAnimation(1,Text(
-                            statelist[index].toString().split('  ')[0],
+                            suggestionlist[index].toString().split('  ')[0],
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18.0,
@@ -106,7 +101,7 @@ class _StateDataScreenState extends State<StateDataScreen> {
                         children: <Widget>[
                           SizedBox(width: 30,),
                       FadeAnimation(1.2,Text(
-                            statelist[index].toString().split('  ')[1].replaceAllMapped(kreg, kmathFunc),
+                            suggestionlist[index].toString().split('  ')[1].replaceAllMapped(kreg, kmathFunc),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18.0,
@@ -121,9 +116,8 @@ class _StateDataScreenState extends State<StateDataScreen> {
               ),
             ),
           );
-        },
-        itemCount: data == null ? 0 : statelist.length,
-      ),
-    );
+    }),
+  );
   }
+
 }

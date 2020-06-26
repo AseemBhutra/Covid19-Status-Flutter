@@ -5,7 +5,8 @@ import 'package:covid19_status/Components/constants.dart';
 import 'package:covid19_status/Animations/FadeAnimation.dart';
 import 'package:covid19_status/Components/DistrictModel.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';  
+import 'dart:convert';
+
 
 
 
@@ -32,7 +33,8 @@ class _DistrictDataState extends State<DistrictData> {
   getname(name){
     dname=name;
   }
-  
+
+
   Future<List<DistrictModel>> _fetchData() async {
     var response = await http.get('https://api.covid19india.org/v2/state_district_wise.json');
 
@@ -41,13 +43,11 @@ class _DistrictDataState extends State<DistrictData> {
       List<DistrictModel> listOfCovidData = items.map<DistrictModel>((json) {
         return DistrictModel.fromJson(json);
       }).toList();
-
       return listOfCovidData;
     } else {
       throw Exception('Failed to load internet');
     }
   }
-
 
 
 
@@ -92,23 +92,27 @@ class _DistrictDataState extends State<DistrictData> {
           ? Center(
         child: CircularProgressIndicator(),
       )
-          : ListView.builder(
+          : RefreshIndicator(
+                      backgroundColor: kBackgroundColor,
+                      color: Colors.white,
+                      onRefresh: _fetchData,
+            child: ListView.builder(
         itemBuilder: (context, index) {
-            return GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>DistrictScreen(distdata: listOfCityData,dname: listOfCityData[index].district,)));
-                },
-                child: Card(
-                  color: kBackgroundColor,
-                  child: Container(
-          decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: kContainerColor,
-          ),
-          height: 70,
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Row(
-          children: <Widget>[
+              return GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>DistrictScreen(distdata: listOfCityData,dname: listOfCityData[index].district,)));
+                  },
+                  child: Card(
+                    color: kBackgroundColor,
+                    child: Container(
+            decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: kContainerColor,
+            ),
+            height: 70,
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Row(
+            children: <Widget>[
 //                    SizedBox(width: 5,),
 //                    Text ('${index + 1} .',
 //                      style: TextStyle(
@@ -117,50 +121,51 @@ class _DistrictDataState extends State<DistrictData> {
 //                          fontFamily: 'SourceSansPro'),
 //                    ),
 //                    SizedBox(width: 5,),
-            Container(
-            color: kContainerColor,
-            width: 175,
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                FadeAnimation(1,Text(
-                  listOfCityData[index].district,
-                  style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 18.0,
-          fontFamily: 'SourceSansPro'),
-                )),
-              ],
+              Container(
+              color: kContainerColor,
+              width: 175,
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FadeAnimation(1,Text(
+                    listOfCityData[index].district,
+                    style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18.0,
+            fontFamily: 'SourceSansPro'),
+                  )),
+                ],
+              ),
+              ),
+              Container(
+              color: kContainerColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(width: 30,),
+                 FadeAnimation(1.2,Text(
+                  listOfCityData[index].confirmed.replaceAllMapped(kreg, kmathFunc),
+                   style: TextStyle(
+             fontWeight: FontWeight.bold,
+             fontSize: 18.0,
+             fontFamily: 'SourceSansPro',
+             color: Colors.deepOrange),
+                 )),
+                ],
+              ),
+              ),
+            ],
             ),
-            ),
-            Container(
-            color: kContainerColor,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(width: 30,),
-               FadeAnimation(1.2,Text(
-                listOfCityData[index].confirmed.replaceAllMapped(kreg, kmathFunc),
-                 style: TextStyle(
-           fontWeight: FontWeight.bold,
-           fontSize: 18.0,
-           fontFamily: 'SourceSansPro',
-           color: Colors.deepOrange),
-               )),
-              ],
-            ),
-            ),
-          ],
-          ),
+                    ),
                   ),
-                ),
-              );
+                );
         },
         itemCount: listOfCityData == null ? 0 : listOfCityData.length,
-      );
+      ),
+          );
 
                 }
             }

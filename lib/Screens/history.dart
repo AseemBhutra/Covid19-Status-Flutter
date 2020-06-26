@@ -1,7 +1,7 @@
+import 'package:covid19_status/Components/SearchDate.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Animations/FadeAnimation.dart';
 import 'package:covid19_status/Components/constants.dart';
-//import 'dart:collection';
 
 class History extends StatefulWidget {
   History({this.history});
@@ -12,7 +12,6 @@ class History extends StatefulWidget {
 
 class _HistoryState extends State<History> {
 
-  List<String> date = [];
   List<String> cases = [];
   @override
   void initState() {
@@ -23,11 +22,11 @@ Map data;
   getdata(history){
     data = history;
     for(int i=data['cases_time_series'].length-1; i >= 0 ;i--) {
-      date.add(data['cases_time_series'][i]['date'].toString());
-      cases.add(data['cases_time_series'][i]['totalconfirmed'].toString() + ' ('+data['cases_time_series'][i]['dailyconfirmed'].toString() +')');
+      cases.add(data['cases_time_series'][i]['date'].toString()
+      +'  '+data['cases_time_series'][i]['totalconfirmed'].toString() 
+      + '  ('+data['cases_time_series'][i]['dailyconfirmed'].toString() +')');
     }
-//    Map<String , String> map = Map.fromIterables(date, cases);
-//    print(map);
+
   }
 
   @override
@@ -37,20 +36,18 @@ Map data;
       appBar: AppBar(
         title: Text('History'),
         backgroundColor: kBackgroundColor,
-//        actions: <Widget>[
-//          Tooltip(
-//            message: 'Search',
-//            child: IconButton(
-//              icon: Icon(Icons.search,
-//                  color: Colors.white),
-//              onPressed: (){
-////                Navigator.push(context, MaterialPageRoute(builder: (context){
-////                  return History(history: data,);
-////                }));
-//              },
-//            ),
-//          ),
-//        ],
+       actions: <Widget>[
+         Tooltip(
+           message: 'Search',
+           child: IconButton(
+             icon: Icon(Icons.search,
+                 color: Colors.white),
+             onPressed: (){
+             showSearch(context: context, delegate: Search(dateSearch: cases));
+             },
+           ),
+         ),
+       ],
       ),
       body: data == null
           ? Center(
@@ -87,8 +84,8 @@ Map data;
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           FadeAnimation(1,Text(
-                            date[index].toString(),
-                            style: TextStyle(
+                            cases[index].toString().split('  ')[0],
+                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18.0,
                                 fontFamily: 'SourceSansPro',
@@ -109,7 +106,7 @@ Map data;
                           Row(
                             children: <Widget>[
                               FadeAnimation(1.2,Text(
-                                cases[index].toString().split(' ')[0].replaceAllMapped(kreg, kmathFunc),
+                                cases[index].toString().split('  ')[1].replaceAllMapped(kreg, kmathFunc),
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
@@ -117,7 +114,7 @@ Map data;
                                     color: Colors.white),
                               )),
                               FadeAnimation(1.2,Text(
-                               ' ' +cases[index].toString().split(' ')[1].replaceAllMapped(kreg, kmathFunc),
+                               ' ' +cases[index].toString().split('  ')[2].replaceAllMapped(kreg, kmathFunc),
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16.0,
