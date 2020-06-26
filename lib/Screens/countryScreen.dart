@@ -34,6 +34,17 @@ class _CountryScreenState extends State<CountryScreen> {
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
         title: Text(cdata[cindex]['country'].toString().toUpperCase(),),
+        actions: <Widget>[
+          Tooltip(message: 'Home',
+          child: IconButton(
+              icon: Icon(Icons.home,
+                  color: Colors.white),
+              onPressed: (){
+                Navigator.popUntil(context, (route) => route.isFirst);
+                },
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),

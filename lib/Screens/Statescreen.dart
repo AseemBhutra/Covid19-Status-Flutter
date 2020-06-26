@@ -2,7 +2,7 @@ import 'package:covid19_status/Components/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Components/reusableCard.dart';
 import 'package:pie_chart/pie_chart.dart';
-//import 'package:covid19_status/Screens/districtdata.dart';
+import 'package:covid19_status/Screens/districtdata.dart';
 import 'package:intl/intl.dart';
 
 class StateScreen extends StatefulWidget {
@@ -146,37 +146,37 @@ int acode = 0;
               ),
             ),
 
-//            Container(
-//              child: Row(
-//                children: <Widget>[
-//                  Expanded(
-//                    child: GestureDetector(
-//                      //padding: EdgeInsets.all(0),
-//                      onTap: (){
-//                        Navigator.push(context, MaterialPageRoute(builder: (context) => DistrictData(name: sdata['statewise'][acode]['state'],)));
-//                      },
-//                      child: Container(
-//                        height: 60,
-//                        margin: EdgeInsets.all(5.0),
-//                        decoration: BoxDecoration(
-//                          color: kContainerColor,
-//                          borderRadius: BorderRadius.circular(10.0),
-//                        ),
-//                        child: Center(
-//                          child: Text(
-//                            'District data'+ ' of '+ sdata['statewise'][acode]['state'].toString(),
-//                            style: TextStyle(
-//                              fontSize: kHeadcontSize,
-//                              color: kTestscolor,
-//                            ),
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  ),
-//                ],
-//              ),
-//            ),
+           Container(
+             child: Row(
+               children: <Widget>[
+                 Expanded(
+                   child: GestureDetector(
+                     //padding: EdgeInsets.all(0),
+                     onTap: (){
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => DistrictData(name: sdata['statewise'][acode]['state'],)));
+                     },
+                     child: Container(
+                       height: 60,
+                       margin: EdgeInsets.all(5.0),
+                       decoration: BoxDecoration(
+                         color: kContainerColor,
+                         borderRadius: BorderRadius.circular(10.0),
+                       ),
+                       child: Center(
+                         child: Text(
+                           'District data'+ ' of '+ sdata['statewise'][acode]['state'].toString(),
+                           style: TextStyle(
+                             fontSize: kHeadcontSize,
+                             color: kTestscolor,
+                           ),
+                         ),
+                       ),
+                     ),
+                   ),
+                 ),
+               ],
+             ),
+           ),
           ],
         ),
       ),

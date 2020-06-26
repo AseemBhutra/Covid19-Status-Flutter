@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Components/constants.dart';
 import 'package:covid19_status/Screens/Statescreen.dart';
-import 'package:covid19_status/Components/SearchState.dart';
+//import 'package:covid19_status/Components/SearchState.dart';
 
 
 class StateDataScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class _StateDataScreenState extends State<StateDataScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        title: Text('State Data'),
+        title: Text('State Data'.toUpperCase()),
         backgroundColor: kBackgroundColor,
 //      actions: <Widget>[
 //        Tooltip(

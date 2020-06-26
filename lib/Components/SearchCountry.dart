@@ -86,30 +86,32 @@ class SearchCountry extends SearchDelegate {
                         ),
                       ),
                       SizedBox(width: 5,),
-                      Container(
-                        color: kContainerColor,
-                        width: 175,
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              suggestionlist[index]['country'],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
-                                  fontFamily: 'SourceSansPro'),
-                            ),
-                          ],
+                      Expanded(
+                        child: Container(
+                          color: kContainerColor,
+                          //width: 175,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                suggestionlist[index]['country'],
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    fontFamily: 'SourceSansPro'),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         child: Container(
                           color: kContainerColor,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
                                 suggestionlist[index]['cases']
@@ -121,6 +123,7 @@ class SearchCountry extends SearchDelegate {
                                     fontFamily: 'SourceSansPro',
                                     color: Colors.deepOrange),
                               ),
+                              SizedBox(width: 8,),
                             ],
                           ),
                         ),
@@ -183,30 +186,32 @@ class SearchCountry extends SearchDelegate {
                         ),
                       ),
                       SizedBox(width: 5,),
-                      Container(
-                        color: kContainerColor,
-                        width: 175,
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                             Text(
-                              suggestionlist[index]['country'],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
-                                  fontFamily: 'SourceSansPro'),
-                            ),
-                          ],
+                      Expanded(
+                        child: Container(
+                          color: kContainerColor,
+                          //width: 175,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                               Text(
+                                suggestionlist[index]['country'],
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    fontFamily: 'SourceSansPro'),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
                         child: Container(
                           color: kContainerColor,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                                Text(
                                 suggestionlist[index]['cases']
@@ -218,6 +223,7 @@ class SearchCountry extends SearchDelegate {
                                     fontFamily: 'SourceSansPro',
                                     color: Colors.deepOrange),
                               ),
+                              SizedBox(width: 8,),
                             ],
                           ),
                         ),
