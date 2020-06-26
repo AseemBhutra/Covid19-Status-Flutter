@@ -41,7 +41,7 @@ int dindex;
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        title: Text(listOfCityData[dindex].district.toUpperCase()),
+        title: Container(child: Text(listOfCityData[dindex].district.toUpperCase(),overflow: TextOverflow.ellipsis,)),
         actions: <Widget>[
           Tooltip(message: 'Home',
           child: IconButton(
