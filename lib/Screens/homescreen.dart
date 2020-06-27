@@ -32,6 +32,9 @@ class _HomescreenState extends State<Homescreen> {
   String dateFormat;
   String timeFormat;
   List abc;
+  var deltaconfirmed;
+  var deltarecovered;
+  var deltadeceased;
 
   Future getdata()async{
     var url = 'https://api.covid19india.org/data.json';
@@ -43,6 +46,10 @@ class _HomescreenState extends State<Homescreen> {
     mdate = DateFormat('dd/MM/yyyy HH:mm').parse(data['statewise'][0]['lastupdatedtime']);
     dateFormat = DateFormat("dd MMM yyyy").format(mdate);
     timeFormat = DateFormat("hh:mm a").format(mdate);
+    deltaconfirmed = int.parse(data['statewise'][0]['deltaconfirmed']) <= 0 ? '♥' : data['statewise'][0]['deltaconfirmed'];
+    deltarecovered = int.parse(data['statewise'][0]['deltarecovered']) <= 0 ? '♥' : data['statewise'][0]['deltarecovered'];
+    deltadeceased = int.parse(data['statewise'][0]['deltadeaths']) <= 0 ? '♥' : data['statewise'][0]['deltadeaths'];
+    
     }
 
 
@@ -127,7 +134,7 @@ class _HomescreenState extends State<Homescreen> {
                       child: ReusableCard(
                         l1: 'Confirmed',
                         l2: "${data['statewise'][0]['confirmed']}".replaceAllMapped(kreg, kmathFunc),
-                        l3: '+ ${data['statewise'][0]['deltaconfirmed']}'.replaceAllMapped(kreg, kmathFunc),
+                        l3: '+ ' + deltaconfirmed.replaceAllMapped(kreg, kmathFunc),
                         color: kConfirmedcolor,
                         ),
                       ),
@@ -149,7 +156,7 @@ class _HomescreenState extends State<Homescreen> {
                         child: ReusableCard(
                           l1: 'Recovered',
                           l2: data['statewise'][0]['recovered'].replaceAllMapped(kreg, kmathFunc),
-                          l3: '+ ${data['statewise'][0]['deltarecovered']}'.replaceAllMapped(kreg, kmathFunc),
+                          l3: '+ ' + deltarecovered.replaceAllMapped(kreg, kmathFunc),
                           color: kRecoveredcolor,
                         ),
                       ),
@@ -157,7 +164,7 @@ class _HomescreenState extends State<Homescreen> {
                         child: ReusableCard(
                           l1: 'Deceased',
                           l2: data['statewise'][0]['deaths'].replaceAllMapped(kreg, kmathFunc),
-                          l3: '+ ${data['statewise'][0]['deltadeaths']}'.replaceAllMapped(kreg, kmathFunc),
+                          l3: '+ ' + deltadeceased.replaceAllMapped(kreg, kmathFunc),
                           color: kDeceasedcolor,
                         ),
                       ),

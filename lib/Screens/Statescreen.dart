@@ -31,7 +31,6 @@ String scode;
   getdata(data,statecode){
     sdata = data;
     scode = statecode;
-    //print(scode);
     formatTime();
     getIndex();
   }

@@ -58,8 +58,8 @@ class _DistrictDataState extends State<DistrictData> {
         backgroundColor: kBackgroundColor,
         title: Row(
           children: <Widget>[
-            Container(child: Text(dname,overflow: TextOverflow.ellipsis,)),
-           // Container(child: Text(' (Districts)',overflow: TextOverflow.ellipsis,style: TextStyle(color: Color(0xffff9933)),)),
+            Flexible(child: Container(child: Text(dname.toUpperCase(),overflow: TextOverflow.ellipsis,))),
+            Flexible(child: Container(child: Text(' (Districts)',overflow: TextOverflow.ellipsis,style: TextStyle(color: Color(0xffff9933)),))),
           ],
         ),
         actions: <Widget>[
