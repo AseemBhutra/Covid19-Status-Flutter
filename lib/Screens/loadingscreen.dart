@@ -3,6 +3,7 @@ import 'package:covid19_status/Components/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Screens/homescreen.dart';
+
 class Loadingscreen extends StatefulWidget {
   @override
   _LoadingscreenState createState() => _LoadingscreenState();
@@ -14,11 +15,15 @@ class _LoadingscreenState extends State<Loadingscreen> {
   void initState() {
     super.initState();
     //getData();
+
     startTimer();
+
   }
+
 
   startTimer()async{
     var duration = Duration(seconds: 2);
+    
     return Timer(duration, route);
   }
   void route() async{
@@ -28,13 +33,11 @@ class _LoadingscreenState extends State<Loadingscreen> {
 
    @override
    Widget build(BuildContext context) {
-
      return Scaffold(
        backgroundColor: kBackgroundColor,
        body: Container(
          height: MediaQuery.of(context).size.height,
          child: Column(
-           //crossAxisAlignment: CrossAxisAlignment.center,
            mainAxisAlignment: MainAxisAlignment.center,
            children: <Widget>[
              Container(height: MediaQuery.of(context).size.height/3,),
@@ -61,7 +64,7 @@ class _LoadingscreenState extends State<Loadingscreen> {
                    ),
                    Padding(padding: EdgeInsets.only(top: 10.0),),
                    Text(
-                     '2.0',
+                     kVersion.toString(),
                      style: TextStyle(
                        fontSize: 15.0,
                        color: Colors.white,
@@ -71,10 +74,6 @@ class _LoadingscreenState extends State<Loadingscreen> {
                  ],
                ),
              ),
-             //Padding(padding: EdgeInsets.only(top: 20.0)),
-
-             //Padding(padding: EdgeInsets.only(bottom: 120.0),),
-
              Container(
                height: MediaQuery.of(context).size.height/3,
                child: Column(
@@ -103,7 +102,6 @@ class _LoadingscreenState extends State<Loadingscreen> {
              ),
 
 
-          //   Padding(padding: EdgeInsets.only(bottom: 20.0),),
            ],
          ),
        ),
