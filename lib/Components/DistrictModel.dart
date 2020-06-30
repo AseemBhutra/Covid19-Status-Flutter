@@ -15,9 +15,7 @@ class DistrictModel {
       var tagObjsJson = json['districtData'] as List;
       List<CityData> _tags = tagObjsJson.map((tagJson) =>
           CityData.fromJson(tagJson)).toList();
-
-
-      return DistrictModel(
+       return DistrictModel(
           json['state'],
           json['statecode'],
           _tags
@@ -34,6 +32,7 @@ class CityData {
   String deceased;
   String recovered;
   String active;
+  Delta delta;
 
   CityData({
     this.district,
@@ -41,6 +40,7 @@ class CityData {
     this.deceased,
     this.recovered,
     this.active,
+    this.delta,
 
   }) ;
 
@@ -51,6 +51,32 @@ class CityData {
       deceased: json['deceased'].toString(),
       recovered: json['recovered'].toString(),
       active: json['active'].toString(),
+      delta: Delta.fromJson(json["delta"]),
     );
   }
+}
+
+
+class Delta {
+  int confirmed;
+  int deceased;
+  int recovered;
+
+  Delta({
+    this.confirmed,
+    this.deceased,
+    this.recovered,
+  });
+
+  factory Delta.fromJson(Map<String, dynamic> json) => Delta(
+        confirmed: json["confirmed"],
+        deceased: json["deceased"],
+        recovered: json["recovered"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "confirmed": confirmed,
+        "deceased": deceased,
+        "recovered": recovered,
+      };
 }

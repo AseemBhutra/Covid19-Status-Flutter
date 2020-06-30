@@ -41,11 +41,9 @@ int dindex;
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        title: Flexible(
-                  child: Container(child: Text(listOfCityData[dindex].district.toUpperCase(),
-        overflow: TextOverflow.ellipsis,
-          )),
-        ),
+        title: Text(listOfCityData[dindex].district.toUpperCase(),
+        // overflow: TextOverflow.ellipsis,
+          ),
         actions: <Widget>[
           Tooltip(message: 'Home',
           child: IconButton(
@@ -92,7 +90,7 @@ int dindex;
                     child: ReusableCard(
                       l1: 'Confirmed',
                       l2: listOfCityData[dindex].confirmed.replaceAllMapped(kreg, kmathFunc),
-                      l3: ''.replaceAllMapped(kreg, kmathFunc),
+                      l3: '+ '+listOfCityData[dindex].delta.confirmed.toString().replaceAllMapped(kreg, kmathFunc),
                       color: kConfirmedcolor,
                     ),
                   ),
@@ -114,7 +112,7 @@ int dindex;
                     child: ReusableCard(
                       l1: 'Recovered',
                       l2: listOfCityData[dindex].recovered.replaceAllMapped(kreg, kmathFunc),
-                      l3: ''.replaceAllMapped(kreg, kmathFunc),
+                      l3: '+ '+listOfCityData[dindex].delta.recovered.toString().replaceAllMapped(kreg, kmathFunc),
                       color: kRecoveredcolor,
                     ),
                   ),
@@ -122,7 +120,7 @@ int dindex;
                     child: ReusableCard(
                       l1: 'Deceased',
                       l2: listOfCityData[dindex].deceased.replaceAllMapped(kreg, kmathFunc),
-                      l3: ''.replaceAllMapped(kreg, kmathFunc),
+                      l3: '+ '+listOfCityData[dindex].delta.deceased.toString().replaceAllMapped(kreg, kmathFunc),
                       color: kDeceasedcolor,
                     ),
                   ),
