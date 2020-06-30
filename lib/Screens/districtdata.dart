@@ -113,15 +113,7 @@ class _DistrictDataState extends State<DistrictData> {
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Row(
             children: <Widget>[
-//                    SizedBox(width: 5,),
-//                    Text ('${index + 1} .',
-//                      style: TextStyle(
-//                          fontWeight: FontWeight.bold,
-//                          fontSize: 18.0,
-//                          fontFamily: 'SourceSansPro'),
-//                    ),
-//                    SizedBox(width: 5,),
-              Container(
+            Container(
               color: kContainerColor,
               width: 175,
               margin: EdgeInsets.symmetric(horizontal: 10),
@@ -169,8 +161,6 @@ class _DistrictDataState extends State<DistrictData> {
 
                 }
             }
-//            if(listOfCityData.length>0)
-//            return new CityDataDisplayList(state: listOfCityData,indData :snapshot.data);
 
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");

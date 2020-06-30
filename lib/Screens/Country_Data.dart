@@ -5,6 +5,7 @@ import 'package:covid19_status/Components/constants.dart';
 import 'package:covid19_status/Components/Networking.dart';
 import 'package:covid19_status/Screens/countryScreen.dart';
 import 'package:covid19_status/Components/SearchCountry.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 
 class CountryDataScreen extends StatefulWidget {
 
@@ -28,6 +29,15 @@ class _CountryDataScreenState extends State<CountryDataScreen> {
       data = countrydata;
     });
   }
+
+//  dataRefreshed(){
+//    Fluttertoast.showToast(
+//        msg: 'Data Refreshed!',
+//        toastLength: Toast.LENGTH_SHORT,
+//        gravity: ToastGravity.BOTTOM,
+//        timeInSecForIosWeb: 1
+//    );
+//  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+import 'package:covid19_status/Animations/FadeAnimation.dart';
 import 'package:covid19_status/Components/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Components/reusableCard.dart';
@@ -162,13 +163,13 @@ int acode = 0;
                          borderRadius: BorderRadius.circular(10.0),
                        ),
                        child: Center(
-                         child: Text(
+                         child: FadeAnimation(1.4,Text(
                            'District data'+ ' of '+ sdata['statewise'][acode]['state'].toString(),
                            style: TextStyle(
                              fontSize: kHeadcontSize,
                              color: kTestscolor,
                            ),
-                         ),
+                         )),
                        ),
                      ),
                    ),

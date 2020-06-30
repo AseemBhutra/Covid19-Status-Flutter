@@ -1,3 +1,4 @@
+import 'package:covid19_status/Animations/FadeAnimation.dart';
 import 'package:covid19_status/Components/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -18,29 +19,29 @@ class ReusableCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-           Text(l1,
+           FadeAnimation(1,Text(l1,
             style: TextStyle(
               color:color,
               fontSize: kHeadcontSize,
             ),
-          ),
+          )),
           SizedBox(
             height: kSizedboxheight,
           ),
-          Text(
+          FadeAnimation(1.2,Text(
             l2,
             style: kTitleTextstyle,
-          ),
+          )),
           SizedBox(
             height: kSizedboxheight,
           ),
-          Text(
+          FadeAnimation(1.3,Text(
             l3,
             style: TextStyle(
               fontSize: kTailContSize,
               color: color,
             ),
-          ),
+          )),
         ],
       ),
       margin: EdgeInsets.all(5.0),

@@ -110,7 +110,7 @@ class _CountryScreenState extends State<CountryScreen> {
                     child: ReusableCard(
                       l1: 'Deceased',
                       l2: cdata[cindex]['deaths'].toString().replaceAllMapped(kreg, kmathFunc),
-                      l3: '+ ${cdata[cindex]['deltadeaths']}'.toString().replaceAllMapped(kreg, kmathFunc),
+                      l3: '+ ' + cdata[cindex]['deltadeaths'].toString().replaceAllMapped(kreg, kmathFunc),
                       color: kDeceasedcolor,
                     ),
                   ),

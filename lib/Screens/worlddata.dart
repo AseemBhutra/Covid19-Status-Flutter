@@ -1,3 +1,4 @@
+import 'package:covid19_status/Animations/FadeAnimation.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_status/Components/Networking.dart';
 import 'package:covid19_status/Components/reusableCard.dart';
@@ -162,13 +163,13 @@ class _WorldDataState extends State<WorldData> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Center(
-                            child: Text(
+                            child: FadeAnimation(1.4,Text(
                               'COUNTRY DATA',
                               style: TextStyle(
                                 fontSize: kHeadcontSize,
                                 color: kLastupdatedcolor,
                               ),
-                            ),
+                            ),),
                           ),
                         ),
                       ),

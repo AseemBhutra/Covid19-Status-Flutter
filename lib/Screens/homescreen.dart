@@ -1,3 +1,4 @@
+import 'package:covid19_status/Animations/FadeAnimation.dart';
 import 'package:covid19_status/Screens/history.dart';
 import 'package:covid19_status/Screens/worlddata.dart';
 import 'package:covid19_status/Components/constants.dart';
@@ -9,7 +10,6 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:covid19_status/Screens/State_Data.dart';
 import 'package:covid19_status/Components/Networking.dart';
 import 'package:intl/intl.dart';
-
 
 
 
@@ -62,7 +62,7 @@ class _HomescreenState extends State<Homescreen> {
         title: Row(
           children: <Widget>[
             Text('Covid-19 Status'),
-            Text(' (INDIA)',style: TextStyle(color: Color(0xffff9933)),),
+            Text(' (INDIA)',style: TextStyle(color: kSaffronColor),),
           ],
         ),
         actions: <Widget>[
@@ -136,7 +136,7 @@ class _HomescreenState extends State<Homescreen> {
                         l2: "${data['statewise'][0]['confirmed']}".replaceAllMapped(kreg, kmathFunc),
                         l3: '+ ' + deltaconfirmed.replaceAllMapped(kreg, kmathFunc),
                         color: kConfirmedcolor,
-                        ),
+                      ),
                       ),
                     Expanded(
                       child: ReusableCard(
@@ -210,13 +210,13 @@ class _HomescreenState extends State<Homescreen> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Center(
-                              child: Text(
+                              child: FadeAnimation(1.4,Text(
                                 'WORLD DATA ',
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Color(0xff6dd3a6),
                                 ),
-                              ),
+                              )),
                             ),
                           ),
                         ),
@@ -235,13 +235,13 @@ class _HomescreenState extends State<Homescreen> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Center(
-                              child: Text(
+                              child: FadeAnimation(1.5,Text(
                                 'STATE DATA',
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Color(0xffd11c42),
                                 ),
-                              ),
+                              )),
                             ),
                           ),
                         ),
