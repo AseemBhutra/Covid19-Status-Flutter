@@ -63,7 +63,7 @@ int acode = 0;
         child: Column(
           children: <Widget>[
             Expanded(
-              flex: 2,
+              //flex: 2,
               child: Container(
                 margin: EdgeInsets.all(5.0),
                 decoration: BoxDecoration(
@@ -131,7 +131,7 @@ int acode = 0;
             ),
 
     Container(
-              height: 120,
+              height: 115,
               child: Row(
                 children: <Widget>[
                   Expanded(

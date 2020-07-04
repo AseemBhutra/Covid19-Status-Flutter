@@ -156,192 +156,195 @@ class _InformationScreenState extends State<InformationScreen> {
         backgroundColor: kBackgroundColor,
         title: Text('About'),
       ),
-        body: Column(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.topCenter,
-              child: SafeArea(
-                child: Container(
-                  margin: EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: kContainerColor,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  height:MediaQuery.of(context).size.height/2.5,
-                  child: Card(
-                    elevation: 6.0,
-                    color: kContainerColor,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        CircleAvatar(
-                          radius: 50.0,
-                          backgroundImage: AssetImage('images/aseeem.jpeg'),
-                        ),
-                        Padding(padding: EdgeInsets.only(top: 10.0),),
-                        FadeAnimation(1,Text('ASEEM BHUTRA',
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'SourceSansPro',
-                          ),)),
-                        Padding(padding: EdgeInsets.only(top: 10.0),),
-                    FadeAnimation(1.2,Text('Flutter Developer/Enthusiast',
-                          style: TextStyle(
-                              fontSize: 20.0,
-                            fontFamily: 'SourceSansPro',
-                          ),)),
-                        Padding(padding: EdgeInsets.only(top: 10.0),),
-                        Divider(
-                          color: Colors.white,
-                          indent: 40.0,
-                          endIndent: 40.0,
-                        ),
-                        Padding(padding: EdgeInsets.only(top: 10.0),),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            FadeAnimation(1.3,IconButton(
-                              iconSize: kIconsize,
-                              icon: FaIcon(FontAwesomeIcons.github),
-                              onPressed: (){
-                                customLaunch('https://github.com/AseemBhutra');
-                              },
-                            )),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            // FadeAnimation(1.4,IconButton(
-                            //   iconSize: kIconsize,
-                            //   icon: FaIcon(FontAwesomeIcons.instagram),
-                            //   onPressed: (){
-                            //     customLaunch('http://www.instagram.com/aseemmaheshwari/');
-                            //   },
-                            // )),
-                            FadeAnimation(1.4,IconButton(
-                              iconSize: kIconsize,
-                              icon: FaIcon(FontAwesomeIcons.globe),
-                              onPressed: (){
-                                customLaunch('https://aseembhutra.github.io/CovidWeb/');
-                              },
-                            )),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            FadeAnimation(1.5,IconButton(
-                              icon: FaIcon(FontAwesomeIcons.facebook),
-                              iconSize: kIconsize,
-                              onPressed: (){
-                                customLaunch('http://www.facebook.com/aseem.bhutra.7');
-                              },
-                            )),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            FadeAnimation(1.6,IconButton(
-                              icon: FaIcon(FontAwesomeIcons.linkedin),
-                              iconSize: kIconsize,
-                              onPressed: (){
-                                customLaunch('http://www.linkedin.com/in/aseem-bhutra-3b5329173');
-                              },
-                            )),
-                          ],
-                        ),
-                        Padding(padding: EdgeInsets.only(top: 10.0),),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            FlatButton(
-                              padding: EdgeInsets.all(0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: kBackgroundColor,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                width: 130,
-                                height: 42,
-                                child: Center(child: FadeAnimation(1.2,Text('CHECK UPDATE',
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    fontFamily: 'SourceSansPro',
-                                  ),
-                                ),),),
+        body: SingleChildScrollView(
+                  child: Column(
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topCenter,
+                child: SafeArea(
+                  child: Container(        
+                    margin: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: kContainerColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    height:MediaQuery.of(context).size.height/2,
+                    child: Card(
+                      elevation: 6.0,
+                      color: kContainerColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          CircleAvatar(
+                            radius: 50.0,
+                            backgroundImage: AssetImage('images/aseeem.jpeg'),
+                          ),
+                          Padding(padding: EdgeInsets.only(top: 7.0),),
+                          FadeAnimation(1,Text('ASEEM BHUTRA',
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'SourceSansPro',
+                            ),)),
+                          Padding(padding: EdgeInsets.only(top: 7.0),),
+                      FadeAnimation(1.2,Text('Flutter Developer/Enthusiast',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                              color: Colors.grey,
+                              fontFamily: 'SourceSansPro',
+                            ),)),
+                          Padding(padding: EdgeInsets.only(top: 7.0),),
+                          Divider(
+                            color: Colors.white,
+                            indent: 40.0,
+                            endIndent: 40.0,
+                          ),
+                          Padding(padding: EdgeInsets.only(top: 7.0),),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              FadeAnimation(1.3,IconButton(
+                                iconSize: kIconsize,
+                                icon: FaIcon(FontAwesomeIcons.github),
+                                onPressed: (){
+                                  customLaunch('https://github.com/AseemBhutra');
+                                },
+                              )),
+                              SizedBox(
+                                width: 10,
                               ),
-                              onPressed: ()async{
-                                await getUpdate();
-                                if(data['version'] == kVersion){
-                                  noUpdateAvailable();
-                                }
-                                else{
-                                  _showupdate();
-                                }
-                              },
-                            ),
-                            SizedBox(width: 20,),
-                            FlatButton(
-                              padding: EdgeInsets.all(0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: kBackgroundColor,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                width: 130,
-                                height: 42,
-
-                                child: Center(child: FadeAnimation(1.2,Text('CHANGE LOG',
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    fontFamily: 'SourceSansPro',
-                                  ),
-                                ),),),
+                              // FadeAnimation(1.4,IconButton(
+                              //   iconSize: kIconsize,
+                              //   icon: FaIcon(FontAwesomeIcons.instagram),
+                              //   onPressed: (){
+                              //     customLaunch('http://www.instagram.com/aseemmaheshwari/');
+                              //   },
+                              // )),
+                              FadeAnimation(1.4,IconButton(
+                                iconSize: kIconsize,
+                                icon: FaIcon(FontAwesomeIcons.globe),
+                                onPressed: (){
+                                  customLaunch('https://aseembhutra.github.io/CovidWeb/');
+                                },
+                              )),
+                              SizedBox(
+                                width: 10,
                               ),
-                              onPressed: (){
-                                _showDialog();
-                              },
-                            ),
-                          ],
-                        ),
+                              FadeAnimation(1.5,IconButton(
+                                icon: FaIcon(FontAwesomeIcons.facebook),
+                                iconSize: kIconsize,
+                                onPressed: (){
+                                  customLaunch('http://www.facebook.com/aseem.bhutra.7');
+                                },
+                              )),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              FadeAnimation(1.6,IconButton(
+                                icon: FaIcon(FontAwesomeIcons.linkedin),
+                                iconSize: kIconsize,
+                                onPressed: (){
+                                  customLaunch('http://www.linkedin.com/in/aseem-bhutra-3b5329173');
+                                },
+                              )),
+                            ],
+                          ),
+                          Padding(padding: EdgeInsets.only(top: 7.0),),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              FlatButton(
+                                padding: EdgeInsets.all(0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: kBackgroundColor,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  width: 130,
+                                  height: 42,
+                                  child: Center(child: FadeAnimation(1.2,Text('CHECK UPDATE',
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      fontFamily: 'SourceSansPro',
+                                    ),
+                                  ),),),
+                                ),
+                                onPressed: ()async{
+                                  await getUpdate();
+                                  if(data['version'] == kVersion){
+                                    noUpdateAvailable();
+                                  }
+                                  else{
+                                    _showupdate();
+                                  }
+                                },
+                              ),
+                              SizedBox(width: 20,),
+                              FlatButton(
+                                padding: EdgeInsets.all(0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: kBackgroundColor,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  width: 130,
+                                  height: 42,
 
-                      ],
+                                  child: Center(child: FadeAnimation(1.2,Text('CHANGE LOG',
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      fontFamily: 'SourceSansPro',
+                                    ),
+                                  ),),),
+                                ),
+                                onPressed: (){
+                                  _showDialog();
+                                },
+                              ),
+                            ],
+                          ),
+
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-             ),
-            Padding(padding: EdgeInsets.only(top:10.0),),
-            Container(
-              margin: EdgeInsets.only(left: 25.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: FadeAnimation(1.3,Text('Credits :',
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'SourceSansPro',
-                ),)),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top:5.0),),
-            Container(
-              margin: EdgeInsets.only(left: 30.0,right: 5.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: FadeAnimation(1.4,Text(
-                  '$bullet covid19india.org for India specific API.'
-                '\n$bullet corona.lmao.ninja for Global API.'
-                '\n$bullet Flaticon for app icon.'
-                '\n$bullet Vipul Jha for Design.'
-                '\n$bullet Rohit Tambi for Testing.'
-                '\n$bullet SuryaKant for Web',
-              
+               ),
+              Padding(padding: EdgeInsets.only(top:10.0),),
+              Container(
+                margin: EdgeInsets.only(left: 25.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: FadeAnimation(1.3,Text('Credits :',
                   style: TextStyle(
-                    fontSize: 19.0,
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
                     fontFamily: 'SourceSansPro',
                   ),)),
+                ),
               ),
-            ),
-          ],
+              Padding(padding: EdgeInsets.only(top:5.0),),
+              Container(
+                margin: EdgeInsets.only(left: 30.0,right: 5.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: FadeAnimation(1.4,Text(
+                    '$bullet covid19india.org for India specific API.'
+                  '\n$bullet corona.lmao.ninja for Global API.'
+                  '\n$bullet Flaticon for app icon.'
+                  '\n$bullet Vipul Jha for Design.'
+                  '\n$bullet Rohit Tambi for Testing/Web.'
+                  '\n$bullet SuryaKant for Web',
+                
+                    style: TextStyle(
+                      fontSize: 19.0,
+                      fontFamily: 'SourceSansPro',
+                    ),)),
+                ),
+              ),
+            ],
 
+          ),
         ),
 
     );

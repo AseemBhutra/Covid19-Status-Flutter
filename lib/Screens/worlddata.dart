@@ -132,7 +132,7 @@ class _WorldDataState extends State<WorldData> {
                 ),
               ),
               Container(
-                height:120,
+                height:115,
                 child: Row(
                   children: <Widget>[
                     Expanded(
