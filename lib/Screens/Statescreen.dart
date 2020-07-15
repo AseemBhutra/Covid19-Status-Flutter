@@ -15,37 +15,37 @@ class StateScreen extends StatefulWidget {
 }
 
 class _StateScreenState extends State<StateScreen> {
-Map sdata;
-String scode;
-
+  Map sdata;
+  String scode;
 
   @override
   void initState() {
     super.initState();
-  getdata(widget.data,widget.statecode);
+    getdata(widget.data, widget.statecode);
   }
-
 
   DateTime mdate;
   String dateFormat;
   String timeFormat;
-  getdata(data,statecode){
+  getdata(data, statecode) {
     sdata = data;
     scode = statecode;
     formatTime();
     getIndex();
   }
-int acode = 0;
-  getIndex(){
-    for(int i = 0; i<sdata['statewise'].length;i++){
-     if(scode == sdata['statewise'][i]['statecode']){
-       acode = i;
-     }
+
+  int acode = 0;
+  getIndex() {
+    for (int i = 0; i < sdata['statewise'].length; i++) {
+      if (scode == sdata['statewise'][i]['statecode']) {
+        acode = i;
+      }
     }
   }
 
-  formatTime(){
-    mdate = DateFormat('dd/MM/yyyy HH:mm').parse(sdata['statewise'][acode]['lastupdatedtime']);
+  formatTime() {
+    mdate = DateFormat('dd/MM/yyyy HH:mm')
+        .parse(sdata['statewise'][acode]['lastupdatedtime']);
     dateFormat = DateFormat("dd MMM yyyy").format(mdate);
     timeFormat = DateFormat("hh:mm a").format(mdate);
   }
@@ -56,10 +56,12 @@ int acode = 0;
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        title: Text(sdata['statewise'][acode]['state'].toString().toUpperCase(),),
+        title: Text(
+          sdata['statewise'][acode]['state'].toString().toUpperCase(),
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
         child: Column(
           children: <Widget>[
             Expanded(
@@ -73,8 +75,10 @@ int acode = 0;
                 child: PieChart(
                   dataMap: {
                     'Active': double.parse(sdata['statewise'][acode]['active']),
-                    'Recovered': double.parse(sdata['statewise'][acode]['recovered']),
-                    'Deceased':double.parse(sdata['statewise'][acode]['deaths'])
+                    'Recovered':
+                        double.parse(sdata['statewise'][acode]['recovered']),
+                    'Deceased':
+                        double.parse(sdata['statewise'][acode]['deaths'])
                   },
                   colorList: [
                     kPiechartactivecolor,
@@ -84,22 +88,24 @@ int acode = 0;
                 ),
               ),
             ),
-
             Expanded(
               child: Row(
                 children: <Widget>[
                   Expanded(
                     child: ReusableCard(
                       l1: 'Confirmed',
-                      l2: sdata['statewise'][acode]['confirmed'].replaceAllMapped(kreg, kmathFunc),
-                      l3: '+ ${sdata['statewise'][acode]['deltaconfirmed']}'.replaceAllMapped(kreg, kmathFunc),
+                      l2: sdata['statewise'][acode]['confirmed']
+                          .replaceAllMapped(kreg, kmathFunc),
+                      l3: '+ ${sdata['statewise'][acode]['deltaconfirmed']}'
+                          .replaceAllMapped(kreg, kmathFunc),
                       color: kConfirmedcolor,
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
                       l1: 'Active',
-                      l2: sdata['statewise'][acode]['active'].replaceAllMapped(kreg, kmathFunc),
+                      l2: sdata['statewise'][acode]['active']
+                          .replaceAllMapped(kreg, kmathFunc),
                       l3: '',
                       color: kActivecolor,
                     ),
@@ -113,24 +119,27 @@ int acode = 0;
                   Expanded(
                     child: ReusableCard(
                       l1: 'Recovered',
-                      l2: sdata['statewise'][acode]['recovered'].replaceAllMapped(kreg, kmathFunc),
-                      l3: '+ ${sdata['statewise'][acode]['deltarecovered']}'.replaceAllMapped(kreg, kmathFunc),
+                      l2: sdata['statewise'][acode]['recovered']
+                          .replaceAllMapped(kreg, kmathFunc),
+                      l3: '+ ${sdata['statewise'][acode]['deltarecovered']}'
+                          .replaceAllMapped(kreg, kmathFunc),
                       color: kRecoveredcolor,
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
                       l1: 'Deceased',
-                      l2: sdata['statewise'][acode]['deaths'].replaceAllMapped(kreg, kmathFunc),
-                      l3: '+ ${sdata['statewise'][acode]['deltadeaths']}'.replaceAllMapped(kreg, kmathFunc),
+                      l2: sdata['statewise'][acode]['deaths']
+                          .replaceAllMapped(kreg, kmathFunc),
+                      l3: '+ ${sdata['statewise'][acode]['deltadeaths']}'
+                          .replaceAllMapped(kreg, kmathFunc),
                       color: kDeceasedcolor,
                     ),
                   ),
                 ],
               ),
             ),
-
-    Container(
+            Container(
               height: 115,
               child: Row(
                 children: <Widget>[
@@ -145,38 +154,47 @@ int acode = 0;
                 ],
               ),
             ),
-
-           Container(
-             child: Row(
-               children: <Widget>[
-                 Expanded(
-                   child: GestureDetector(
-                     //padding: EdgeInsets.all(0),
-                     onTap: (){
-                       Navigator.push(context, MaterialPageRoute(builder: (context) => DistrictData(name: sdata['statewise'][acode]['state'],)));
-                     },
-                     child: Container(
-                       height: 60,
-                       margin: EdgeInsets.all(5.0),
-                       decoration: BoxDecoration(
-                         color: kContainerColor,
-                         borderRadius: BorderRadius.circular(10.0),
-                       ),
-                       child: Center(
-                         child: FadeAnimation(1.4,Text(
-                           'District data'+ ' of '+ sdata['statewise'][acode]['state'].toString(),
-                           style: TextStyle(
-                             fontSize: kHeadcontSize,
-                             color: kTestscolor,
-                           ),
-                         )),
-                       ),
-                     ),
-                   ),
-                 ),
-               ],
-             ),
-           ),
+            Container(
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: InkWell(
+                      //padding: EdgeInsets.all(0),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DistrictData(
+                                      name: sdata['statewise'][acode]['state'],
+                                    )));
+                      },
+                      child: Container(
+                        height: 60,
+                        margin: EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                          color: kContainerColor,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(
+                          child: FadeAnimation(
+                              1.4,
+                              Text(
+                                'District data' +
+                                    ' of ' +
+                                    sdata['statewise'][acode]['state']
+                                        .toString(),
+                                style: TextStyle(
+                                  fontSize: kHeadcontSize,
+                                  color: kTestscolor,
+                                ),
+                              )),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

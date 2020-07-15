@@ -3,30 +3,32 @@ import 'package:covid19_status/Components/constants.dart';
 import 'package:covid19_status/Screens/countryScreen.dart';
 
 class SearchCountry extends SearchDelegate {
-
   final List countrydata;
 
   SearchCountry({this.countrydata});
 
-
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
-      IconButton(icon: Icon(Icons.clear),
+      IconButton(
+        icon: Icon(Icons.clear),
         color: Colors.white,
         onPressed: () {
           query = '';
-        },),
+        },
+      ),
     ];
   }
 
   @override
   Widget buildLeading(BuildContext context) {
-    return IconButton(icon: Icon(Icons.arrow_back),
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
       color: Colors.white,
       onPressed: () {
         Navigator.pop(context);
-      },);
+      },
+    );
   }
 
   @override
@@ -37,12 +39,14 @@ class SearchCountry extends SearchDelegate {
     );
   }
 
-
   @override
   Widget buildResults(BuildContext context) {
-    final suggestionlist = query.isEmpty ? countrydata :
-    countrydata.where((element) =>
-        element['country'].toString().toLowerCase().contains(query)).toList();
+    final suggestionlist = query.isEmpty
+        ? countrydata
+        : countrydata
+            .where((element) =>
+                element['country'].toString().toLowerCase().contains(query))
+            .toList();
 
     return Scaffold(
       backgroundColor: kBackgroundColor,
@@ -51,9 +55,11 @@ class SearchCountry extends SearchDelegate {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                    CountryScreen(data: suggestionlist,
-                      index: index)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            CountryScreen(data: suggestionlist, index: index)));
               },
               child: Card(
                 color: kBackgroundColor,
@@ -62,30 +68,37 @@ class SearchCountry extends SearchDelegate {
                     borderRadius: BorderRadius.circular(10),
                     color: kContainerColor,
                   ),
-                  height: 70,
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  height: kListContainerHeight,
+                  // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Row(
                     //mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Center(
-                        child: Text('${index + 1}.',
+                        child: Text(
+                          '${index + 1}.',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
                               fontFamily: 'SourceSansPro'),
                         ),
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(5.0),
                         child: Image.network(
                           suggestionlist[index]['countryInfo']['flag'],
-                          height: 50,
+                          height: 45,
                           width: 70,
                         ),
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Expanded(
                         child: Container(
                           color: kContainerColor,
@@ -97,6 +110,7 @@ class SearchCountry extends SearchDelegate {
                             children: <Widget>[
                               Text(
                                 suggestionlist[index]['country'],
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
@@ -123,7 +137,9 @@ class SearchCountry extends SearchDelegate {
                                     fontFamily: 'SourceSansPro',
                                     color: Colors.deepOrange),
                               ),
-                              SizedBox(width: 8,),
+                              SizedBox(
+                                width: 8,
+                              ),
                             ],
                           ),
                         ),
@@ -137,13 +153,14 @@ class SearchCountry extends SearchDelegate {
     );
   }
 
-
-
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionlist = query.isEmpty ? countrydata :
-    countrydata.where((element) =>
-        element['country'].toString().toLowerCase().contains(query)).toList();
+    final suggestionlist = query.isEmpty
+        ? countrydata
+        : countrydata
+            .where((element) =>
+                element['country'].toString().toLowerCase().contains(query))
+            .toList();
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: ListView.builder(
@@ -151,9 +168,11 @@ class SearchCountry extends SearchDelegate {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                    CountryScreen(data: suggestionlist,
-                      index: index)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            CountryScreen(data: suggestionlist, index: index)));
               },
               child: Card(
                 color: kBackgroundColor,
@@ -162,30 +181,37 @@ class SearchCountry extends SearchDelegate {
                     borderRadius: BorderRadius.circular(10),
                     color: kContainerColor,
                   ),
-                  height: 70,
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  height: kListContainerHeight,
+                  //margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Row(
                     //mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Center(
-                        child: Text('${index + 1}.',
+                        child: Text(
+                          '${index + 1}.',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
                               fontFamily: 'SourceSansPro'),
                         ),
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(5.0),
                         child: Image.network(
                           suggestionlist[index]['countryInfo']['flag'],
-                          height: 50,
+                          height: 45,
                           width: 70,
                         ),
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Expanded(
                         child: Container(
                           color: kContainerColor,
@@ -195,8 +221,9 @@ class SearchCountry extends SearchDelegate {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                               Text(
+                              Text(
                                 suggestionlist[index]['country'],
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
@@ -213,7 +240,7 @@ class SearchCountry extends SearchDelegate {
                             mainAxisAlignment: MainAxisAlignment.end,
                             //crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                               Text(
+                              Text(
                                 suggestionlist[index]['cases']
                                     .toString()
                                     .replaceAllMapped(kreg, kmathFunc),
@@ -223,7 +250,9 @@ class SearchCountry extends SearchDelegate {
                                     fontFamily: 'SourceSansPro',
                                     color: Colors.deepOrange),
                               ),
-                              SizedBox(width: 8,),
+                              SizedBox(
+                                width: 8,
+                              ),
                             ],
                           ),
                         ),
