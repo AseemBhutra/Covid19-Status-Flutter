@@ -29,4 +29,5 @@ COVID-19 Status App is exactly what one needs during these tough times to keep o
 
 * [Rohit Tambi](https://m.facebook.com/rohit.tambi.56?tsid=0.4000807123606789&source=result) for Web/Testing.
 * [Suryakant Sharma](https://m.facebook.com/profile.php?id=100009423485349&ref=content_filter) for Web.  
+* [Abdul Hakeem Quazi](https://www.linkedin.com/in/abdul-hakeem-quazi-05674b149) for AppIcon.
 * [Vipul Jha](https://m.facebook.com/lordarcadius?tsid=0.1676240306192247&source=result) for design.
